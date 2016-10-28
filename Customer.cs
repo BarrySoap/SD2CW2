@@ -8,20 +8,27 @@ namespace CW2
 {
     class Customer
     {
-        private string firstName;
-        private string secondName;
+        private string customerFirstName;
+        private string customerSecondName;
+        private string customerAddress;
         private double custRefNumber = 1;
 
-        public string FirstName
+        public string CustomerFirstName
         {
-            get { return firstName; }
-            set { firstName = value; }
+            get { return customerFirstName; }
+            set { customerFirstName = value; }
         }
 
-        public string SecondName
+        public string CustomerSecondName
         {
-            get { return secondName; }
-            set { secondName = value; }
+            get { return customerSecondName; }
+            set { customerSecondName = value; }
+        }
+
+        public string CustomerAddress
+        {
+            get { return customerAddress; }
+            set { customerAddress = value; }
         }
 
         public double CustRefNumber
