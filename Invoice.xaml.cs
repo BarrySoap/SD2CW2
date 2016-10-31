@@ -15,28 +15,15 @@ using System.Windows.Shapes;
 namespace CW2
 {
     /// <summary>
-    /// Interaction logic for CBG.xaml
+    /// Interaction logic for Invoice.xaml
     /// </summary>
-    public partial class CBG : Window
+    public partial class Invoice : Window
     {
-        public CBG()
+        public Invoice()
         {
             InitializeComponent();
         }
 
-        private void btnAddCust_Click(object sender, RoutedEventArgs e)
-        {
-            Customer cust1 = new Customer();
-        }
-
-        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddGuest_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

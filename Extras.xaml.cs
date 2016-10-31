@@ -33,15 +33,15 @@ namespace CW2
 
         public void hideOptions()
         {
-            txtHireStart.Visibility = Visibility.Hidden;
-            txtHireEnd.Visibility = Visibility.Hidden;                              // Hide each label/text box under the
-            txtDriverName.Visibility = Visibility.Hidden;                           // car hire option until the user checks
+            dpStartDate.Visibility = Visibility.Hidden;
+            dpEndDate.Visibility = Visibility.Hidden;                              // Hide each label/text box under the
+            dpDriverName.Visibility = Visibility.Hidden;                           // car hire option until the user checks
             lblHireStart.Visibility = Visibility.Hidden;                            // the 'car hire' box.
             lblHireEnd.Visibility = Visibility.Hidden;
             lblDriverName.Visibility = Visibility.Hidden;
-            txtHireStart.Text = " ";
-            txtHireEnd.Text = " ";                                                  // These values cannot be blank as the validator below
-            txtDriverName.Text = " ";                                               // depends on whether the fields are blank or not.
+            dpStartDate.Text = " ";
+            dpEndDate.Text = " ";                                                  // These values cannot be blank as the validator below
+            dpDriverName.Text = " ";                                               // depends on whether the fields are blank or not.
             txtEveningDietary.IsEnabled = false;
             txtBreakDietary.IsEnabled = false;
         }
@@ -60,22 +60,22 @@ namespace CW2
 
         private void checkCarHire_Checked(object sender, RoutedEventArgs e)
         {
-            txtHireStart.Visibility = Visibility.Visible;                           // Car hire is checked, so show all of
-            txtHireEnd.Visibility = Visibility.Visible;                             // the associated labels/text boxes
-            txtDriverName.Visibility = Visibility.Visible;
+            dpStartDate.Visibility = Visibility.Visible;                           // Car hire is checked, so show all of
+            dpEndDate.Visibility = Visibility.Visible;                             // the associated labels/text boxes
+            dpDriverName.Visibility = Visibility.Visible;
             lblHireStart.Visibility = Visibility.Visible;
             lblHireEnd.Visibility = Visibility.Visible;
             lblDriverName.Visibility = Visibility.Visible;
-            txtHireStart.Text = "";                                                 // Make the fields blank to aid the
-            txtHireEnd.Text = "";                                                   // validator.
-            txtDriverName.Text = "";
+            dpStartDate.Text = "";                                                 // Make the fields blank to aid the
+            dpEndDate.Text = "";                                                   // validator.
+            dpDriverName.Text = "";
         }
 
         private void checkCarHire_Unchecked(object sender, RoutedEventArgs e)
         {
-            txtHireStart.Visibility = Visibility.Hidden;
-            txtHireEnd.Visibility = Visibility.Hidden;                              // Hide the car hire options if
-            txtDriverName.Visibility = Visibility.Hidden;                           // the 'Car Hire' check box is
+            dpStartDate.Visibility = Visibility.Hidden;
+            dpEndDate.Visibility = Visibility.Hidden;                              // Hide the car hire options if
+            dpDriverName.Visibility = Visibility.Hidden;                           // the 'Car Hire' check box is
             lblHireStart.Visibility = Visibility.Hidden;                            // unchecked.
             lblHireEnd.Visibility = Visibility.Hidden;
             lblDriverName.Visibility = Visibility.Hidden;
@@ -111,14 +111,14 @@ namespace CW2
                 breakfastRequirements = txtBreakDietary.Text;
             }
 
-            if (checkCarHire.IsChecked == true && txtHireStart.Text.Length == 0 || txtHireEnd.Text.Length == 0 || txtDriverName.Text.Length == 0)
+            if (checkCarHire.IsChecked == true && dpStartDate.Text.Length == 0 || dpEndDate.Text.Length == 0 || dpDriverName.Text.Length == 0)
             {
                 MessageBox.Show("As you have checked the box for car hire, the encompassed fields cannot be blank!");
             } else
             {
-                hireStartDate = txtHireStart.Text;
-                hireEndDate = txtHireEnd.Text;
-                driverName = txtDriverName.Text;
+                hireStartDate = dpStartDate.Text;
+                hireEndDate = dpEndDate.Text;
+                driverName = dpDriverName.Text;
             }
         }
     }

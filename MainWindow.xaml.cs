@@ -23,14 +23,6 @@ namespace CW2
         public MainWindow()
         {
             InitializeComponent();
-            InitialiseObjects();
-        }
-
-        public void InitialiseObjects() 
-        {
-            Customer cust1 = new Customer();
-            Booking book1 = new Booking();
-            Guests guest1 = new Guests();
         }
 
         private void btnAddCBG_Click(object sender, RoutedEventArgs e)
@@ -47,7 +39,8 @@ namespace CW2
 
         private void btnInvoice_Click(object sender, RoutedEventArgs e)
         {
-
+            Invoice inv = new Invoice();
+            inv.Show();
         }
 
         private void btnDelCustomer_Click(object sender, RoutedEventArgs e)
