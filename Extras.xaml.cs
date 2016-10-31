@@ -19,6 +19,12 @@ namespace CW2
     /// </summary>
     public partial class Extras : Window
     {
+        private string eveningRequirements;
+        private string breakfastRequirements;
+        private string hireStartDate;
+        private string hireEndDate;
+        private string driverName;
+
         public Extras()
         {
             InitializeComponent();
@@ -33,6 +39,9 @@ namespace CW2
             lblHireStart.Visibility = Visibility.Hidden;                            // the 'car hire' box.
             lblHireEnd.Visibility = Visibility.Hidden;
             lblDriverName.Visibility = Visibility.Hidden;
+            txtHireStart.Text = " ";
+            txtHireEnd.Text = " ";                                                  // These values cannot be blank as the validator below
+            txtDriverName.Text = " ";                                               // depends on whether the fields are blank or not.
             txtEveningDietary.IsEnabled = false;
             txtBreakDietary.IsEnabled = false;
         }
@@ -57,6 +66,9 @@ namespace CW2
             lblHireStart.Visibility = Visibility.Visible;
             lblHireEnd.Visibility = Visibility.Visible;
             lblDriverName.Visibility = Visibility.Visible;
+            txtHireStart.Text = "";                                                 // Make the fields blank to aid the
+            txtHireEnd.Text = "";                                                   // validator.
+            txtDriverName.Text = "";
         }
 
         private void checkCarHire_Unchecked(object sender, RoutedEventArgs e)
@@ -83,7 +95,31 @@ namespace CW2
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            if (checkMeals.IsChecked == true && txtEveningDietary.Text.Length == 0)             // Check if the user has asked for evening meals, but left the dietary field blank.
+            {
+                MessageBox.Show("As you have checked the box for evening meals, please enter some dietary requirements! If none, type N/A.");
+            } else
+            {
+                eveningRequirements = txtEveningDietary.Text;
+            }
 
+            if (checkBreakfast.IsChecked == true && txtBreakDietary.Text.Length == 0)           // Same as above, with breakfast.
+            {
+                MessageBox.Show("As you have checked the box for breakfast, please enter some dietary requirements! If none, type N/A.");
+            } else
+            {
+                breakfastRequirements = txtBreakDietary.Text;
+            }
+
+            if (checkCarHire.IsChecked == true && txtHireStart.Text.Length == 0 || txtHireEnd.Text.Length == 0 || txtDriverName.Text.Length == 0)
+            {
+                MessageBox.Show("As you have checked the box for car hire, the encompassed fields cannot be blank!");
+            } else
+            {
+                hireStartDate = txtHireStart.Text;
+                hireEndDate = txtHireEnd.Text;
+                driverName = txtDriverName.Text;
+            }
         }
     }
 }
