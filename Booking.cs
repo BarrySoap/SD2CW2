@@ -15,7 +15,7 @@ namespace CW2
     {
         private DateTime arrivalDate = DateTime.MinValue;           // Values are initialised as
         private DateTime departureDate = DateTime.MinValue;         // "01 January 0001"
-        private double refNumber = 1;
+        private double refNumber = 0;
 
         public DateTime ArrivalDate
         {

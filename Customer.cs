@@ -11,7 +11,7 @@ namespace CW2
         private string customerFirstName;
         private string customerSecondName;
         private string customerAddress;
-        private double custRefNumber = 1;
+        private double custRefNumber = 0;
 
         public string CustomerFirstName
         {

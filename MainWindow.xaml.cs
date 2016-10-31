@@ -23,16 +23,26 @@ namespace CW2
         public MainWindow()
         {
             InitializeComponent();
+            InitialiseObjects();
+        }
+
+        public void InitialiseObjects() 
+        {
+            Customer cust1 = new Customer();
+            Booking book1 = new Booking();
+            Guests guest1 = new Guests();
         }
 
         private void btnAddCBG_Click(object sender, RoutedEventArgs e)
         {
-            
+            CBG cuboguest = new CBG();
+            cuboguest.Show();
         }
 
         private void btnExtras_Click(object sender, RoutedEventArgs e)
         {
-
+            Extras extra = new Extras();
+            extra.Show();
         }
 
         private void btnInvoice_Click(object sender, RoutedEventArgs e)
