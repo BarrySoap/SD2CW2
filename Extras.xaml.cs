@@ -111,7 +111,7 @@ namespace CW2
                 breakfastRequirements = txtBreakDietary.Text;
             }
 
-            if (checkCarHire.IsChecked == true && dpStartDate.Text.Length == 0 || dpEndDate.Text.Length == 0 || txtDriverName.Text.Length == 0)
+            if (checkCarHire.IsChecked == true && dpStartDate.SelectedDate == null && dpEndDate.SelectedDate == null && txtDriverName.Text.Length == 0)
             {
                 MessageBox.Show("As you have checked the box for car hire, the encompassed fields cannot be blank!");
             } else
