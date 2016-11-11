@@ -28,6 +28,10 @@ namespace CW2
         public void hideAdditions()
         {
             lblCBG.Visibility = Visibility.Hidden;
+            btnaddCust.Visibility = Visibility.Hidden;
+            lblProperty1.Visibility = Visibility.Hidden;
+            lblProperty2.Visibility = Visibility.Hidden;
+            lblProperty3.Visibility = Visibility.Hidden;
             txtCBG1.Visibility = Visibility.Hidden;
             txtCBG2.Visibility = Visibility.Hidden;
             txtCBG3.Visibility = Visibility.Hidden;
@@ -36,11 +40,15 @@ namespace CW2
         private void btnAddCust_Click(object sender, RoutedEventArgs e)
         {
             Customer cust1 = new Customer();
+            btnaddCust.Visibility = Visibility.Visible;
+            lblProperty1.Visibility = Visibility.Visible;
+            lblProperty2.Visibility = Visibility.Visible;
+            lblProperty3.Visibility = Visibility.Visible;
             lblCBG.Visibility = Visibility.Visible;
             lblCBG.Content = "Add a Customer:";
-            txtCBG1.Text = "First Name";
-            txtCBG2.Text = "Last Name";
-            txtCBG3.Text = "Address";
+            lblProperty1.Content = "First Name:";
+            lblProperty2.Content = "Last Name:";
+            lblProperty3.Content = "Address:";
             txtCBG1.Visibility = Visibility.Visible;
             txtCBG2.Visibility = Visibility.Visible;
             txtCBG3.Visibility = Visibility.Visible;
@@ -49,10 +57,14 @@ namespace CW2
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             Booking book1 = new Booking();
+            btnaddCust.Visibility = Visibility.Visible;
+            lblProperty1.Visibility = Visibility.Visible;
+            lblProperty2.Visibility = Visibility.Visible;
             lblCBG.Visibility = Visibility.Visible;
             lblCBG.Content = "Add a Booking:";
-            txtCBG1.Text = "Arrival Date";
-            txtCBG2.Text = "Departure Date";
+            lblProperty1.Content = "Arrival Date:";
+            lblProperty2.Content = "Departure Date:";
+            lblProperty3.Visibility = Visibility.Hidden;
             txtCBG1.Visibility = Visibility.Visible;
             txtCBG2.Visibility = Visibility.Visible;
             txtCBG3.Visibility = Visibility.Hidden;
@@ -61,6 +73,11 @@ namespace CW2
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void btnaddCust_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
