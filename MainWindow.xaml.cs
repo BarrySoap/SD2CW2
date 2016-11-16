@@ -45,12 +45,12 @@ namespace CW2
 
         private void btnDelCustomer_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnDelBooking_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnAmendCBG_Click(object sender, RoutedEventArgs e)

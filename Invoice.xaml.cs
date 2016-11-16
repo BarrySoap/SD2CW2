@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace CW2
 {
-    /// <summary>
-    /// Interaction logic for Invoice.xaml
-    /// </summary>
     public partial class Invoice : Window
     {
         public Invoice()
@@ -24,6 +21,17 @@ namespace CW2
             InitializeComponent();
         }
 
-        
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            double temp;
+
+            if (txtBRefNumber.Text != "" && Double.TryParse(txtBRefNumber.Text, out temp))
+            {
+                lblInvoice.Content = "Overall booking cost: ";
+            } else
+            {
+                MessageBox.Show("The booking reference number must be valid!");
+            }
+        }
     }
 }

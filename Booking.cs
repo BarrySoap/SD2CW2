@@ -32,7 +32,7 @@ namespace CW2
         public double RefNumber
         {
             get { return refNumber; }
-            set { refNumber = value + 1; }
+            set { refNumber = value; }
         }
             
     }

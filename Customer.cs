@@ -34,7 +34,7 @@ namespace CW2
         public double CustRefNumber
         {
             get { return custRefNumber; }
-            set { custRefNumber = value + 1; }
+            set { custRefNumber = value; }
         }
     }
 }

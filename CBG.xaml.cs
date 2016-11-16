@@ -116,6 +116,8 @@ namespace CW2
                     cust1.CustomerFirstName = txtCBG1.Text;
                     cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If not, update the object variables with the values of the text boxes.
                     cust1.CustomerAddress = txtCBG2.Text;
+                    cust1.CustRefNumber = cust1.CustRefNumber + 1;
+                    MessageBox.Show("Your customer reference number is: " + cust1.CustRefNumber);
                 } else
                 {
                     MessageBox.Show("The above fields must be valid/not blank!");                           // An error is thrown if any of the text boxes are blank.
@@ -130,6 +132,8 @@ namespace CW2
                 {
                     book1.ArrivalDate = DateTime.Parse(txtCBG2.Text);                                       // Update the object variables.
                     book1.DepartureDate = DateTime.Parse(txtCBG3.Text);
+                    book1.RefNumber = book1.RefNumber + 1;
+                    MessageBox.Show("Your booking reference number is: " + book1.RefNumber);
                 } else
                 {
                     MessageBox.Show("The arrival date and departure date boxes must be valid dates!");      // An error is thrown otherwise.
