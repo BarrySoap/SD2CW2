@@ -14,49 +14,52 @@ using System.Windows.Shapes;
 
 namespace CW2
 {
-    /// <summary>
-    /// Interaction logic for CBG.xaml
-    /// </summary>
     public partial class CBG : Window
     {
-        Guests guest1 = new Guests();
-        Booking book1 = new Booking();
-        Customer cust1 = new Customer();
+        Guests guest1 = new Guests();                               // Creating objects for guests,
+        Booking book1 = new Booking();                              //                      bookings,
+        Customer cust1 = new Customer();                            //                  and customers. This allows the class to manipulate the classes variables.
 
         public CBG()
         {
             InitializeComponent();
-            hideAdditions();
+            hideAdditions();                                        // Call the hide method below.
         }
 
         public void hideAdditions()
         {
-            lblCBG.Visibility = Visibility.Hidden;
-            btnaddCBG.Visibility = Visibility.Hidden;
-            lblProperty1.Visibility = Visibility.Hidden;
+            lblCBG.Visibility = Visibility.Hidden;                  // This method will hide every label and text box so
+            btnaddCBG.Visibility = Visibility.Hidden;               // that the user cannot see them before pressing
+            lblProperty1.Visibility = Visibility.Hidden;            // the 'Add' buttons.
             lblProperty_5.Visibility = Visibility.Hidden;
             lblProperty2.Visibility = Visibility.Hidden;
             lblProperty3.Visibility = Visibility.Hidden;
-            txtCBG1.Visibility = Visibility.Hidden;
-            txtCBG1_5.Visibility = Visibility.Hidden;
-            txtCBG2.Visibility = Visibility.Hidden;
-            txtCBG3.Visibility = Visibility.Hidden;
+            txtCBG1.Visibility = Visibility.Hidden;                 // eg. These hide functions will hide the text boxes
+            txtCBG1_5.Visibility = Visibility.Hidden;               // which allow the user to input data. That way,
+            txtCBG2.Visibility = Visibility.Hidden;                 // we avoid any exceptions where the user enteres
+            txtCBG3.Visibility = Visibility.Hidden;                 // data before deciding to add a customer/booking/guest.
         }
 
         private void btnAddCust_Click(object sender, RoutedEventArgs e)
         {
-            btnaddCBG.Visibility = Visibility.Visible;
-            lblProperty1.Visibility = Visibility.Visible;
-            lblProperty_5.Visibility = Visibility.Visible;
+            btnaddCBG.Content = "Add Customer";
+            btnaddCBG.Visibility = Visibility.Visible;              // The user has chosen to now add a customer, so
+            lblProperty1.Visibility = Visibility.Visible;           // the header label and text box labels must now
+            lblProperty_5.Visibility = Visibility.Visible;          // appear.
             lblProperty2.Visibility = Visibility.Visible;
+            txtCBG1.Text = "";
+            txtCBG1_5.Text = "";                                    // Clear the text boxes so that the previous inputs don't stay around.
+            txtCBG2.Text = "";
             lblCBG.Visibility = Visibility.Visible;
-            lblCBG.Content = "Add a Customer:";
-            lblProperty1.Content = "First Name:";
-            lblProperty_5.Content = "Last Name:";
-            lblProperty2.Content = "Address:";
+            lblCBG.Content = "Add a Customer:";                     // Change the content of the labels over the text
+            lblProperty1.Content = "First Name:";                   // boxes so that we don't have to create new
+            lblProperty_5.Content = "Last Name:";                   // text boxes every time the user chooses to add
+            lblProperty2.Content = "Address:";                      // a customer, booking or guest.
             txtCBG1.Visibility = Visibility.Visible;
-            txtCBG1_5.Visibility = Visibility.Visible;
+            txtCBG1_5.Visibility = Visibility.Visible;              // Allow the user to input data.
             txtCBG2.Visibility = Visibility.Visible;
+            lblProperty3.Visibility = Visibility.Hidden;            // The third text box isn't needed, so hide the label and text box.
+            txtCBG3.Visibility = Visibility.Hidden;
         }
 
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
@@ -66,25 +69,32 @@ namespace CW2
             lblProperty2.Visibility = Visibility.Visible;
             lblProperty3.Visibility = Visibility.Visible;
             lblCBG.Visibility = Visibility.Visible;
-            lblCBG.Content = "Add a Booking:";
-            lblProperty2.Content = "Arrival Date (dd/mm/yyyy):";
-            lblProperty3.Content = "Departure Date (dd/mm/yyyy):";
+            txtCBG1.Text = "";
+            txtCBG1_5.Text = "";                                    // Clear the text boxes so that the previous inputs don't stay around.
+            txtCBG2.Text = "";
+            lblCBG.Content = "Add a Booking:";                      // Same as above, but by changing the header label,
+            lblProperty2.Content = "Arrival Date (dd/mm/yyyy):";    // it allows for an easy validator when pressing the 
+            lblProperty3.Content = "Departure Date (dd/mm/yyyy):";  // "Add Booking" button.
             lblProperty1.Visibility = Visibility.Hidden;
             lblProperty_5.Visibility = Visibility.Hidden;
-            txtCBG2.Visibility = Visibility.Visible;
+            txtCBG2.Visibility = Visibility.Visible;                // Allow the user to input data.
             txtCBG3.Visibility = Visibility.Visible;
-            txtCBG1.Visibility = Visibility.Hidden;
-            txtCBG1_5.Visibility = Visibility.Hidden;
+            txtCBG1.Visibility = Visibility.Hidden;                 // Hide the top two text boxes, which are usually
+            txtCBG1_5.Visibility = Visibility.Hidden;               // for a first and last name.
         }
 
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
             btnaddCBG.Content = "Add Guest";
             btnaddCBG.Visibility = Visibility.Visible;
-            lblProperty1.Visibility = Visibility.Visible;
-            lblProperty_5.Visibility = Visibility.Visible;
-            lblProperty2.Visibility = Visibility.Visible;
-            lblProperty3.Visibility = Visibility.Visible;
+            lblProperty1.Visibility = Visibility.Visible;           // In this case, we need each label and text box
+            lblProperty_5.Visibility = Visibility.Visible;          // because the addition of a guest requires the user
+            lblProperty2.Visibility = Visibility.Visible;           // to know the guests' first name, last name, 
+            lblProperty3.Visibility = Visibility.Visible;           // passport number and age.
+            txtCBG1.Text = "";
+            txtCBG1_5.Text = "";                                    // Clear the text boxes so that the previous inputs don't stay around.
+            txtCBG2.Text = "";
+            txtCBG3.Text = "";
             lblCBG.Visibility = Visibility.Visible;
             lblCBG.Content = "Add a Guest:";
             lblProperty1.Content = "First Name:";
@@ -92,37 +102,51 @@ namespace CW2
             lblProperty2.Content = "Passport Number:";
             lblProperty3.Content = "Age:";
             txtCBG1.Visibility = Visibility.Visible;
-            txtCBG1_5.Visibility = Visibility.Visible;
+            txtCBG1_5.Visibility = Visibility.Visible;              // Allow the user to input data
             txtCBG2.Visibility = Visibility.Visible;
             txtCBG3.Visibility = Visibility.Visible;
         }
 
         private void btnaddCBG_Click_1(object sender, RoutedEventArgs e)
         {
-            if (lblCBG.Content.ToString() == "Add a Customer:")
+            if (lblCBG.Content.ToString() == "Add a Customer:")                                             // Check if the header label is for adding a customer. As said above, this makes for an easy validator/check.
             {
-                if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "")
+                if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "")                       // Check if the first/last name and address text boxes aren't blank.
                 {
                     cust1.CustomerFirstName = txtCBG1.Text;
-                    cust1.CustomerSecondName = txtCBG2.Text;
-                    cust1.CustomerAddress = txtCBG3.Text;
+                    cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If not, update the object variables with the values of the text boxes.
+                    cust1.CustomerAddress = txtCBG2.Text;
                 } else
                 {
-                    MessageBox.Show("The above fields must be valid/not blank!");
+                    MessageBox.Show("The above fields must be valid/not blank!");                           // An error is thrown if any of the text boxes are blank.
                 }
             } 
 
-            if (lblCBG.Content.ToString() == "Add a Booking:")
+            if (lblCBG.Content.ToString() == "Add a Booking:")                                              // Check if the header label is for adding a booking.
             {
-                DateTime d;
+                DateTime d;                                                                                 // Initialise a temporary variable for a tryparse.
 
-                if (DateTime.TryParse(txtCBG2.Text, out d) && DateTime.TryParse(txtCBG3.Text, out d))
+                if (DateTime.TryParse(txtCBG2.Text, out d) && DateTime.TryParse(txtCBG3.Text, out d))       // If the arrival/departure date text boxes are in DateTime format,
                 {
-                    book1.ArrivalDate = DateTime.Parse(txtCBG2.Text);
+                    book1.ArrivalDate = DateTime.Parse(txtCBG2.Text);                                       // Update the object variables.
                     book1.DepartureDate = DateTime.Parse(txtCBG3.Text);
                 } else
                 {
-                    MessageBox.Show("The arrival date and departure date boxes must be valid dates!");
+                    MessageBox.Show("The arrival date and departure date boxes must be valid dates!");      // An error is thrown otherwise.
+                }
+            }
+
+            if (lblCBG.Content.ToString() == "Add a Guest:")                                                // Check if the header label is for adding a guest.
+            {
+                if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "" && txtCBG3.Text != "") // Check to see if the text boxes aren't blank.
+                {
+                    guest1.GuestFirstName = txtCBG1.Text;
+                    guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
+                    guest1.GuestPassNumber = txtCBG2.Text;
+                    guest1.GuestAge = int.Parse(txtCBG3.Text);                                              // Parse the text box content (string) to an int.
+                } else
+                {
+                    MessageBox.Show("The above fields must not be blank!");                                 // An error is thrown if any of the text boxes are blank.
                 }
             }
         }
