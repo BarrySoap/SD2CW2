@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,37 @@ namespace CW2
         Guests guest1 = new Guests();                               // Creating objects for guests,
         Booking book1 = new Booking();                              //                      bookings,
         Customer cust1 = new Customer();                            //                  and customers. This allows the class to manipulate the classes variables.
+        string customerPath = @"D:\Coursework 2\Coursework2\Customer Records.txt";
+        string bookingPath = @"D:\Coursework 2\Coursework2\Booking Records.txt";
+        string guestsPath = @"D:\Coursework 2\Coursework2\Guest Records.txt";
 
         public CBG()
         {
             InitializeComponent();
             hideAdditions();                                        // Call the hide method below.
+            if (!File.Exists(customerPath))
+            {
+                using (StreamWriter sw = File.CreateText(customerPath))
+                {
+                    sw.WriteLine("First Name: \t | \t Last Name: \t | \t Address: \t | \t Customer Reference Number:");
+                }
+            }
+
+            if (!File.Exists(bookingPath))
+            {
+                using (StreamWriter sw = File.CreateText(bookingPath))
+                {
+                    sw.WriteLine("Arrival Date: \t | \t Departure Date: \t | \t Booking Reference Number:");
+                }
+            }
+
+            if (!File.Exists(guestsPath))
+            {
+                using (StreamWriter sw = File.CreateText(guestsPath))
+                {
+                    sw.WriteLine("First Name: \t | \t Last Name: \t | \t Passport Number: \t | \t Age:");
+                }
+            }
         }
 
         public void hideAdditions()
