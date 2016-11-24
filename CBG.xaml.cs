@@ -23,6 +23,7 @@ namespace CW2
         string customerPath = @"D:\Coursework 2\Coursework2\Customer Records.txt";
         string bookingPath = @"D:\Coursework 2\Coursework2\Booking Records.txt";
         string guestsPath = @"D:\Coursework 2\Coursework2\Guest Records.txt";
+        private int noOfGuests = 0;
 
         public CBG()
         {
@@ -179,13 +180,24 @@ namespace CW2
             {
                 if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "" && txtCBG3.Text != "") // Check to see if the text boxes aren't blank.
                 {
-                    guest1.GuestFirstName = txtCBG1.Text;
-                    guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
-                    guest1.GuestPassNumber = txtCBG2.Text;
-                    guest1.GuestAge = int.Parse(txtCBG3.Text);                                              // Parse the text box content (string) to an int.
-                    using (StreamWriter sw = File.AppendText(guestsPath))
+                    if (noOfGuests != 4)
                     {
-                        sw.WriteLine(guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge);
+                        guest1.GuestFirstName = txtCBG1.Text;
+                        guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
+                        guest1.GuestPassNumber = txtCBG2.Text;
+                        int temp;
+                        if (!int.TryParse(txtCBG3.Text, out temp))
+                        {
+                            guest1.GuestAge = int.Parse(txtCBG3.Text);                                          // Parse the text box content (string) to an int.
+                        }
+                        noOfGuests = noOfGuests + 1;
+                        using (StreamWriter sw = File.AppendText(guestsPath))
+                        {
+                            sw.WriteLine(guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge);
+                        }
+                    } else
+                    {
+                        MessageBox.Show("You cannot have more than 4 guests accompanying you!");
                     }
                 } else
                 {
