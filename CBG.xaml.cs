@@ -165,6 +165,10 @@ namespace CW2
                     book1.DepartureDate = DateTime.Parse(txtCBG3.Text);
                     book1.RefNumber = book1.RefNumber + 1;
                     MessageBox.Show("Your booking reference number is: " + book1.RefNumber);
+                    using (StreamWriter sw = File.AppendText(bookingPath))
+                    {
+                        sw.WriteLine(book1.ArrivalDate + ", " + book1.DepartureDate + ", " + book1.RefNumber);
+                    }
                 } else
                 {
                     MessageBox.Show("The arrival date and departure date boxes must be valid dates!");      // An error is thrown otherwise.
@@ -179,6 +183,10 @@ namespace CW2
                     guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
                     guest1.GuestPassNumber = txtCBG2.Text;
                     guest1.GuestAge = int.Parse(txtCBG3.Text);                                              // Parse the text box content (string) to an int.
+                    using (StreamWriter sw = File.AppendText(guestsPath))
+                    {
+                        sw.WriteLine(guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge);
+                    }
                 } else
                 {
                     MessageBox.Show("The above fields must not be blank!");                                 // An error is thrown if any of the text boxes are blank.
