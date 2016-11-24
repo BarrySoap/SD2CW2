@@ -32,7 +32,7 @@ namespace CW2
             {
                 using (StreamWriter sw = File.CreateText(customerPath))
                 {
-                    sw.WriteLine("First Name: \t | \t Last Name: \t | \t Address: \t | \t Customer Reference Number:");
+                    sw.WriteLine("First Name, Last Name, Address, Customer Reference Number");
                 }
             }
 
@@ -40,7 +40,7 @@ namespace CW2
             {
                 using (StreamWriter sw = File.CreateText(bookingPath))
                 {
-                    sw.WriteLine("Arrival Date: \t | \t Departure Date: \t | \t Booking Reference Number:");
+                    sw.WriteLine("Arrival Date, Departure Date, Booking Reference Number");
                 }
             }
 
@@ -48,7 +48,7 @@ namespace CW2
             {
                 using (StreamWriter sw = File.CreateText(guestsPath))
                 {
-                    sw.WriteLine("First Name: \t | \t Last Name: \t | \t Passport Number: \t | \t Age:");
+                    sw.WriteLine("First Name, Last Name, Passport Number, Age");
                 }
             }
         }
@@ -145,6 +145,10 @@ namespace CW2
                     cust1.CustomerAddress = txtCBG2.Text;
                     cust1.CustRefNumber = cust1.CustRefNumber + 1;
                     MessageBox.Show("Your customer reference number is: " + cust1.CustRefNumber);
+                    using (StreamWriter sw = File.AppendText(customerPath))
+                    {
+                        sw.WriteLine(cust1.CustomerFirstName + ", " + cust1.CustomerSecondName + ", " + cust1.CustomerAddress + ", " + cust1.CustRefNumber);
+                    }
                 } else
                 {
                     MessageBox.Show("The above fields must be valid/not blank!");                           // An error is thrown if any of the text boxes are blank.
