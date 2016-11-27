@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,26 @@ namespace CW2
     /// </summary>
     public partial class Extras : Window
     {
-        private string eveningRequirements;
-        private string breakfastRequirements;
-        private string hireStartDate;
-        private string hireEndDate;
-        private string driverName;
+        private string extrasPath = @"F:\Coursework 2\Coursework2\Records\Extras Records.txt";
+        public string eveningRequirements;
+        public string breakfastRequirements;
+        public string hireStartDate;
+        public string hireEndDate;
+        public string driverName;
 
         public Extras()
         {
             InitializeComponent();
+            if (!File.Exists(extrasPath))
+            {
+                using (StreamWriter sw = File.CreateText(extrasPath))
+                {
+                    sw.WriteLine("Evening Meals Dietary Requirements (EM), Breakfast Dietary Requirements (BF), Car Hire (CH)" + Environment.NewLine);
+                }
+            }
             hideOptions();
         }
-
+        
         public void hideOptions()
         {
             dpStartDate.Visibility = Visibility.Hidden;
@@ -101,6 +110,10 @@ namespace CW2
             } else
             {
                 eveningRequirements = txtEveningDietary.Text;
+                using (StreamWriter sw = File.AppendText(extrasPath))
+                {
+                    sw.Write(eveningRequirements + ", ");
+                }
             }
 
             if (checkBreakfast.IsChecked == true && txtBreakDietary.Text.Length == 0)           // Same as above, with breakfast.
@@ -109,6 +122,10 @@ namespace CW2
             } else
             {
                 breakfastRequirements = txtBreakDietary.Text;
+                using (StreamWriter sw = File.AppendText(extrasPath))
+                {
+                    sw.Write(breakfastRequirements + ", ");
+                }
             }
 
             if (checkCarHire.IsChecked == true && dpStartDate.SelectedDate == null && dpEndDate.SelectedDate == null && txtDriverName.Text.Length == 0)
@@ -119,6 +136,10 @@ namespace CW2
                 hireStartDate = dpStartDate.Text;
                 hireEndDate = dpEndDate.Text;
                 driverName = txtDriverName.Text;
+                using (StreamWriter sw = File.AppendText(extrasPath))
+                {
+                    sw.Write(driverName + ", " + (DateTime.Parse(hireEndDate) - DateTime.Parse(hireStartDate)).TotalDays);
+                }
             }
         }
     }

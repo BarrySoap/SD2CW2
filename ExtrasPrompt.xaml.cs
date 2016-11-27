@@ -61,17 +61,15 @@ namespace CW2
             {
                 using (StreamWriter sw = File.AppendText(extrasPath))
                 {
-                    sw.WriteLine("-For Booking Reference: " + txtReturnRef.Text + "- " + Environment.NewLine + Environment.NewLine);
-                }
-
-                using (StreamWriter sw = new StreamWriter(extrasPath, false))
-                {
-                    sw.WriteLine("");
+                    sw.Write("-For Booking Reference: " + txtReturnRef.Text + "- ");
                 }
             } else
             {
                 MessageBox.Show("The reference box cannot be blank or invalid!");
             }
+
+            Extras extra1 = new Extras();
+            extra1.Show();
         }
     }
 }
