@@ -141,6 +141,11 @@ namespace CW2
                     sw.Write(driverName + ", " + (DateTime.Parse(hireEndDate) - DateTime.Parse(hireStartDate)).TotalDays);
                 }
             }
+
+            using (StreamWriter sw = File.AppendText(extrasPath))
+            {
+                sw.Write(Environment.NewLine + Environment.NewLine);
+            }
         }
     }
 }
