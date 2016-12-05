@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace CW2
     public partial class AmendCBG : Window
     {
         int selectedItem = 0;
+        string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
+        string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
+        string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
+        string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
 
         public AmendCBG()
         {
@@ -29,18 +34,23 @@ namespace CW2
 
         public void hideOptions()
         {
+            lblRefNumber.Visibility = Visibility.Hidden;
+            txtRefNumber.Visibility = Visibility.Hidden;
             cmbEditDel.Visibility = Visibility.Hidden;
             btnAccept.Visibility = Visibility.Hidden;
             lblSelect.Visibility = Visibility.Hidden;
             cmbSelect.Visibility = Visibility.Hidden;
             lblNewValue.Visibility = Visibility.Hidden;
             txtNewValue.Visibility = Visibility.Hidden;
+            btnSaveChanges.Visibility = Visibility.Hidden;
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             cmbEditDel.Visibility = Visibility.Visible;
             btnAccept.Visibility = Visibility.Visible;
+            lblRefNumber.Visibility = Visibility.Visible;
+            txtRefNumber.Visibility = Visibility.Visible;
 
             switch (cmbAmendChoice.SelectedIndex)
             {
@@ -72,46 +82,54 @@ namespace CW2
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
-            lblSelect.Visibility = Visibility.Visible;
-            cmbSelect.Visibility = Visibility.Visible;
-            lblNewValue.Visibility = Visibility.Visible;
-            txtNewValue.Visibility = Visibility.Visible;
-
-            if (selectedItem == 0)
+            int temp;
+            if (txtRefNumber.Text != "" && int.TryParse(txtRefNumber.Text, out temp)) 
             {
-                lblSelect.Content = "Edit Customer:";
-                cmbSelect.Items.Clear();
-                cmbSelect.Items.Add("First Name");
-                cmbSelect.Items.Add("Last Name");
-                cmbSelect.Items.Add("Address");
-            }
+                lblSelect.Visibility = Visibility.Visible;
+                cmbSelect.Visibility = Visibility.Visible;
+                lblNewValue.Visibility = Visibility.Visible;
+                txtNewValue.Visibility = Visibility.Visible;
+                btnSaveChanges.Visibility = Visibility.Visible;
 
-            if (selectedItem == 1)
-            {
-                lblSelect.Content = "Edit Booking:";
-                cmbSelect.Items.Clear();
-                cmbSelect.Items.Add("Arrival Date");
-                cmbSelect.Items.Add("Departure Date");
-            }
+                if (selectedItem == 0)
+                {
+                    lblSelect.Content = "Edit Customer:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("First Name");
+                    cmbSelect.Items.Add("Last Name");
+                    cmbSelect.Items.Add("Address");
+                }
 
-            if (selectedItem == 2)
-            {
-                lblSelect.Content = "Edit Guests:";
-                cmbSelect.Items.Clear();
-                cmbSelect.Items.Add("First Name");
-                cmbSelect.Items.Add("Last Name");
-                cmbSelect.Items.Add("Passport Number");
-                cmbSelect.Items.Add("Age");
-            }
+                if (selectedItem == 1)
+                {
+                    lblSelect.Content = "Edit Booking:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("Arrival Date");
+                    cmbSelect.Items.Add("Departure Date");
+                }
 
-            if (selectedItem == 3)
+                if (selectedItem == 2)
+                {
+                    lblSelect.Content = "Edit Guests:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("First Name");
+                    cmbSelect.Items.Add("Last Name");
+                    cmbSelect.Items.Add("Passport Number");
+                    cmbSelect.Items.Add("Age");
+                }
+
+                if (selectedItem == 3)
+                {
+                    lblSelect.Content = "Edit Extras:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("Add Breakfast Meals");
+                    cmbSelect.Items.Add("Add Evening Meals");
+                    cmbSelect.Items.Add("Add Car Hire");
+                    lblNewValue.Content = "For amount of Days:";
+                }
+            } else
             {
-                lblSelect.Content = "Edit Extras:";
-                cmbSelect.Items.Clear();
-                cmbSelect.Items.Add("Add Breakfast Meals");
-                cmbSelect.Items.Add("Add Evening Meals");
-                cmbSelect.Items.Add("Add Car Hire");
-                lblNewValue.Content = "For amount of Days:";
+                MessageBox.Show("Reference Number field cannot be blank!");
             }
         }
 
