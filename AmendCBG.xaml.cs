@@ -45,28 +45,20 @@ namespace CW2
                 case -1:
                     break;
                 case 0:
-                    MessageBox.Show("Case 0");
+                    cmbEditDel.Items.Add("Edit Customer");
+                    cmbEditDel.Items.Add("Delete Customer");
                     break;
                 case 1:
-                    MessageBox.Show("Case 1");
+                    cmbEditDel.Items.Add("Edit Booking");
+                    cmbEditDel.Items.Add("Delete Booking");
                     break;
                 case 2:
-                    MessageBox.Show("Case 2");
+                    cmbEditDel.Items.Add("Edit Guests");
+                    cmbEditDel.Items.Add("Delete Guests");
                     break;
                 case 3:
-                    MessageBox.Show("Case 3");
-                    break;
-                case 4:
-                    MessageBox.Show("Case 4");
-                    break;
-                case 5:
-                    MessageBox.Show("Case 5");
-                    break;
-                case 6:
-                    MessageBox.Show("Case 6");
-                    break;
-                case 7:
-                    MessageBox.Show("Case 7");
+                    cmbEditDel.Items.Add("Add Extras");
+                    cmbEditDel.Items.Add("Remove Extras");
                     break;
             }
         }
