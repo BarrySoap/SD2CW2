@@ -48,5 +48,10 @@ namespace CW2
         {
 
         }
+
+        private void btnAmendGuest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
