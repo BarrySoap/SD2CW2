@@ -65,9 +65,9 @@ namespace CW2
 
         public void getCosts()
         {
-            string[] bookLines = File.ReadAllLines(@"F:\Coursework 2\Coursework2\Records\Booking Records.txt");
-            string[] guestLines = File.ReadAllLines(@"F:\Coursework 2\Coursework2\Records\Guest Records.txt");
-            string[] extrasLines = File.ReadAllLines(@"F:\Coursework 2\Coursework2\Records\Extras Records.txt");
+            string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
+            string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
+            string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
             DateTime arrivalDate;
             DateTime departureDate;
             string[] words;
@@ -105,17 +105,16 @@ namespace CW2
                 if (line.Contains("-For Booking Reference: " + txtBRefNumber.Text + "-"))
                 {
                     words = line.Split(' ');
-                    if (words.Length == 8)
-                    {
-                        totalCost = totalCost + (50 * int.Parse(words[7]));
-                    }
+                    totalCost = totalCost + (50 * int.Parse(words[words.Length - 1]));
 
                     if (line.Contains("EVE:"))
                     {
+                        totalCost = totalCost + 15 * totalDays;
                         dietaryResq = separateEVE(line).Replace("-For Booking Reference: " + txtBRefNumber.Text + "- EVE:", "");
                     }
                     if (line.Contains("BK:"))
                     {
+                        totalCost = totalCost + 5 * totalDays;
                         breakfastResq = separateBK(line).Replace("-For Booking Reference: " + txtBRefNumber.Text + "- EVE:" + dietaryResq + ", BK:", "");
                     }
                     if (line.Contains("DN:"))
