@@ -22,34 +22,56 @@ namespace CW2
         public AmendCBG()
         {
             InitializeComponent();
+            hideOptions();
         }
 
-        private void btnAmendCust_Click(object sender, RoutedEventArgs e)
+        public void hideOptions()
         {
-
+            cmbEditDel.Visibility = Visibility.Hidden;
+            btnAccept.Visibility = Visibility.Hidden;
+            lblSelect.Visibility = Visibility.Hidden;
+            cmbSelect.Visibility = Visibility.Hidden;
+            lblNewValue.Visibility = Visibility.Hidden;
+            txtNewValue.Visibility = Visibility.Hidden;
         }
 
-        private void btnAmendBooking_Click(object sender, RoutedEventArgs e)
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            cmbEditDel.Visibility = Visibility.Visible;
+            btnAccept.Visibility = Visibility.Visible;
 
+            switch (cmbAmendChoice.SelectedIndex)
+            {
+                case -1:
+                    break;
+                case 0:
+                    MessageBox.Show("Case 0");
+                    break;
+                case 1:
+                    MessageBox.Show("Case 1");
+                    break;
+                case 2:
+                    MessageBox.Show("Case 2");
+                    break;
+                case 3:
+                    MessageBox.Show("Case 3");
+                    break;
+                case 4:
+                    MessageBox.Show("Case 4");
+                    break;
+                case 5:
+                    MessageBox.Show("Case 5");
+                    break;
+                case 6:
+                    MessageBox.Show("Case 6");
+                    break;
+                case 7:
+                    MessageBox.Show("Case 7");
+                    break;
+            }
         }
 
-        private void btnAmendExtras_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAmendGuest_Click(object sender, RoutedEventArgs e)
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
 
         }
