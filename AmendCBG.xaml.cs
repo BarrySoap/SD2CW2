@@ -19,6 +19,8 @@ namespace CW2
     /// </summary>
     public partial class AmendCBG : Window
     {
+        int selectedItem = 0;
+
         public AmendCBG()
         {
             InitializeComponent();
@@ -45,25 +47,75 @@ namespace CW2
                 case -1:
                     break;
                 case 0:
+                    cmbEditDel.Items.Clear();
                     cmbEditDel.Items.Add("Edit Customer");
-                    cmbEditDel.Items.Add("Delete Customer");
+                    selectedItem = 0;
                     break;
                 case 1:
+                    cmbEditDel.Items.Clear();
                     cmbEditDel.Items.Add("Edit Booking");
-                    cmbEditDel.Items.Add("Delete Booking");
+                    selectedItem = 1;
                     break;
                 case 2:
+                    cmbEditDel.Items.Clear();
                     cmbEditDel.Items.Add("Edit Guests");
-                    cmbEditDel.Items.Add("Delete Guests");
+                    selectedItem = 2;
                     break;
                 case 3:
+                    cmbEditDel.Items.Clear();
                     cmbEditDel.Items.Add("Add Extras");
                     cmbEditDel.Items.Add("Remove Extras");
+                    selectedItem = 3;
                     break;
             }
         }
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            lblSelect.Visibility = Visibility.Visible;
+            cmbSelect.Visibility = Visibility.Visible;
+            lblNewValue.Visibility = Visibility.Visible;
+            txtNewValue.Visibility = Visibility.Visible;
+
+            if (selectedItem == 0)
+            {
+                lblSelect.Content = "Edit Customer:";
+                cmbSelect.Items.Clear();
+                cmbSelect.Items.Add("First Name");
+                cmbSelect.Items.Add("Last Name");
+                cmbSelect.Items.Add("Address");
+            }
+
+            if (selectedItem == 1)
+            {
+                lblSelect.Content = "Edit Booking:";
+                cmbSelect.Items.Clear();
+                cmbSelect.Items.Add("Arrival Date");
+                cmbSelect.Items.Add("Departure Date");
+            }
+
+            if (selectedItem == 2)
+            {
+                lblSelect.Content = "Edit Guests:";
+                cmbSelect.Items.Clear();
+                cmbSelect.Items.Add("First Name");
+                cmbSelect.Items.Add("Last Name");
+                cmbSelect.Items.Add("Passport Number");
+                cmbSelect.Items.Add("Age");
+            }
+
+            if (selectedItem == 3)
+            {
+                lblSelect.Content = "Edit Extras:";
+                cmbSelect.Items.Clear();
+                cmbSelect.Items.Add("Add Breakfast Meals");
+                cmbSelect.Items.Add("Add Evening Meals");
+                cmbSelect.Items.Add("Add Car Hire");
+                lblNewValue.Content = "For amount of Days:";
+            }
+        }
+
+        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
 
         }
