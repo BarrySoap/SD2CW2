@@ -23,6 +23,7 @@ namespace CW2
     {
         int selectedItem = 0;
         string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+        string bookPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
         List<string> updatedLines = new List<string>();
         string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
         string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
@@ -193,6 +194,47 @@ namespace CW2
                         }
 
                         File.WriteAllLines(custPath, updatedLines);
+                        break;
+                }
+            }
+
+            if (lblSelect.Content.ToString() == "Edit Booking:")
+            {
+                switch (cmbSelect.SelectedIndex)
+                {
+                    case -1:
+                        break;
+                    case 0:
+                        updatedLines.Clear();
+                        foreach (string line in bookLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(bookPath, updatedLines);
+                        break;
+                    case 1:
+                        updatedLines.Clear();
+                        foreach (string line in bookLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[6], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(bookPath, updatedLines);
                         break;
                 }
             }
