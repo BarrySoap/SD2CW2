@@ -22,6 +22,8 @@ namespace CW2
     public partial class AmendCBG : Window
     {
         int selectedItem = 0;
+        string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+        List<string> updatedLines = new List<string>();
         string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
         string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
         string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
@@ -137,25 +139,47 @@ namespace CW2
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            if (lblSelect.Content.ToString() == "Edit Customer:" && cmbSelect.SelectedIndex == 0)
+            if (lblSelect.Content.ToString() == "Edit Customer:")
             {
-                string path = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
-                string[] originalLines = File.ReadAllLines(path);
-                List<string> updatedLines = new List<string>();
-
-                foreach (string line in originalLines)
+                switch (cmbSelect.SelectedIndex)
                 {
-                    if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
-                    {
-                        words = line.Split(' ');
-                        string temp = line.Replace(words[4], txtNewValue.Text + ",");
-                        updatedLines.Add(temp);
-                        continue;
-                    }
-                    updatedLines.Add(line);
-                }
+                    case -1:
+                        break;
+                    case 0:
+                        updatedLines.Clear();
+                        foreach (string line in custLines)
+                        {
+                            if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
 
-                File.WriteAllLines(path, updatedLines);
+                        File.WriteAllLines(custPath, updatedLines);
+                        break;
+                    case 1:
+                        updatedLines.Clear();
+                        foreach (string line in custLines)
+                        {
+                            if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[5], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(custPath, updatedLines);
+                        break;
+                    case 2:
+                        break;
+                }
             }
         }
     }
