@@ -137,23 +137,26 @@ namespace CW2
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            var path = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
-            var originalLines = File.ReadAllLines(path);
-            var updatedLines = new List<string>();
-
-            foreach (var line in originalLines)
+            if (lblSelect.Content.ToString() == "Edit Customer:" && cmbSelect.SelectedIndex == 0)
             {
-                if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
-                {
-                    words = line.Split(' ');
-                    string temp = line.Replace(words[4], txtNewValue.Text + ",");
-                    updatedLines.Add(temp);
-                    continue;
-                }
-                updatedLines.Add(line);
-            }
+                string path = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+                string[] originalLines = File.ReadAllLines(path);
+                List<string> updatedLines = new List<string>();
 
-            File.WriteAllLines(path, updatedLines);
+                foreach (string line in originalLines)
+                {
+                    if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
+                    {
+                        words = line.Split(' ');
+                        string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                        updatedLines.Add(temp);
+                        continue;
+                    }
+                    updatedLines.Add(line);
+                }
+
+                File.WriteAllLines(path, updatedLines);
+            }
         }
     }
 }
