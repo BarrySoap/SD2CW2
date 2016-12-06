@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace CW2
         string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
         string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
         string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
-        string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
+        //string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
+        string[] words;
 
         public AmendCBG()
         {
@@ -79,7 +81,7 @@ namespace CW2
                     break;
             }
         }
-
+        
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
             int temp;
@@ -135,7 +137,23 @@ namespace CW2
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
+            var path = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+            var originalLines = File.ReadAllLines(path);
+            var updatedLines = new List<string>();
 
+            foreach (var line in originalLines)
+            {
+                if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
+                {
+                    words = line.Split(' ');
+                    string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                    updatedLines.Add(temp);
+                    continue;
+                }
+                updatedLines.Add(line);
+            }
+
+            File.WriteAllLines(path, updatedLines);
         }
     }
 }
