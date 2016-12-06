@@ -178,6 +178,21 @@ namespace CW2
                         File.WriteAllLines(custPath, updatedLines);
                         break;
                     case 2:
+                        updatedLines.Clear();
+                        foreach (string line in custLines)
+                        {
+                            if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                string[] words2 = txtNewValue.Text.Split(' ');
+                                string temp = line.Replace(words[6], words2[0]).Replace(words[7], words2[1]).Replace(words[8], words2[2]);
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(custPath, updatedLines);
                         break;
                 }
             }
