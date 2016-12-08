@@ -24,6 +24,7 @@ namespace CW2
         int selectedItem = 0;
         string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
         string bookPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
+        string guestsPath = @"D:\Coursework 2\Coursework2\Records\Guest Records.txt";
         List<string> updatedLines = new List<string>();
         string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
         string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
@@ -48,97 +49,11 @@ namespace CW2
             lblNewValue.Visibility = Visibility.Hidden;
             txtNewValue.Visibility = Visibility.Hidden;
             btnSaveChanges.Visibility = Visibility.Hidden;
+            lblGuestValue.Visibility = Visibility.Hidden;
+            txtGuestsValue.Visibility = Visibility.Hidden;
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            cmbEditDel.Visibility = Visibility.Visible;
-            btnAccept.Visibility = Visibility.Visible;
-            lblRefNumber.Visibility = Visibility.Visible;
-            txtRefNumber.Visibility = Visibility.Visible;
-
-            switch (cmbAmendChoice.SelectedIndex)
-            {
-                case -1:
-                    break;
-                case 0:
-                    cmbEditDel.Items.Clear();
-                    cmbEditDel.Items.Add("Edit Customer");
-                    selectedItem = 0;
-                    break;
-                case 1:
-                    cmbEditDel.Items.Clear();
-                    cmbEditDel.Items.Add("Edit Booking");
-                    selectedItem = 1;
-                    break;
-                case 2:
-                    cmbEditDel.Items.Clear();
-                    cmbEditDel.Items.Add("Edit Guests");
-                    selectedItem = 2;
-                    break;
-                case 3:
-                    cmbEditDel.Items.Clear();
-                    cmbEditDel.Items.Add("Add Extras");
-                    cmbEditDel.Items.Add("Remove Extras");
-                    selectedItem = 3;
-                    break;
-            }
-        }
-        
-        private void btnAccept_Click(object sender, RoutedEventArgs e)
-        {
-            int temp;
-            if (txtRefNumber.Text != "" && int.TryParse(txtRefNumber.Text, out temp)) 
-            {
-                lblSelect.Visibility = Visibility.Visible;
-                cmbSelect.Visibility = Visibility.Visible;
-                lblNewValue.Visibility = Visibility.Visible;
-                txtNewValue.Visibility = Visibility.Visible;
-                btnSaveChanges.Visibility = Visibility.Visible;
-
-                if (selectedItem == 0)
-                {
-                    lblSelect.Content = "Edit Customer:";
-                    cmbSelect.Items.Clear();
-                    cmbSelect.Items.Add("First Name");
-                    cmbSelect.Items.Add("Last Name");
-                    cmbSelect.Items.Add("Address");
-                }
-
-                if (selectedItem == 1)
-                {
-                    lblSelect.Content = "Edit Booking:";
-                    cmbSelect.Items.Clear();
-                    cmbSelect.Items.Add("Arrival Date");
-                    cmbSelect.Items.Add("Departure Date");
-                }
-
-                if (selectedItem == 2)
-                {
-                    lblSelect.Content = "Edit Guests:";
-                    cmbSelect.Items.Clear();
-                    cmbSelect.Items.Add("First Name");
-                    cmbSelect.Items.Add("Last Name");
-                    cmbSelect.Items.Add("Passport Number");
-                    cmbSelect.Items.Add("Age");
-                }
-
-                if (selectedItem == 3)
-                {
-                    lblSelect.Content = "Edit Extras:";
-                    cmbSelect.Items.Clear();
-                    cmbSelect.Items.Add("Add Breakfast Meals");
-                    cmbSelect.Items.Add("Add Evening Meals");
-                    cmbSelect.Items.Add("Add Car Hire");
-                    lblNewValue.Content = "For amount of Days:";
-                }
-            } else
-            {
-                MessageBox.Show("Reference Number field cannot be blank!");
-            }
-        }
-
-        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
+        public void editCustomer()
         {
             if (lblSelect.Content.ToString() == "Edit Customer:")
             {
@@ -197,7 +112,10 @@ namespace CW2
                         break;
                 }
             }
+        }
 
+        public void editBooking()
+        {
             if (lblSelect.Content.ToString() == "Edit Booking:")
             {
                 switch (cmbSelect.SelectedIndex)
@@ -238,6 +156,186 @@ namespace CW2
                         break;
                 }
             }
+        }
+
+        public void editGuests()
+        {
+            if (lblSelect.Content.ToString() == "Edit Guests:")
+            {
+                switch (cmbSelect.SelectedIndex)
+                {
+                    case -1:
+                        break;
+                    case 0:
+                        updatedLines.Clear();
+                        foreach (string line in guestLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-") && line.Contains(txtGuestsValue.Text))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(guestsPath, updatedLines);
+                        break;
+                    case 1:
+                        updatedLines.Clear();
+                        foreach (string line in guestLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-") && line.Contains(txtGuestsValue.Text))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[5], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(guestsPath, updatedLines);
+                        break;
+                    case 2:
+                        updatedLines.Clear();
+                        foreach (string line in guestLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-") && line.Contains(txtGuestsValue.Text))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[6], txtNewValue.Text + ",");
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(guestsPath, updatedLines);
+                        break;
+                    case 3:
+                        updatedLines.Clear();
+                        foreach (string line in guestLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-") && line.Contains(txtGuestsValue.Text))
+                            {
+                                words = line.Split(' ');
+                                string temp = line.Replace(words[7], txtNewValue.Text);
+                                updatedLines.Add(temp);
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+
+                        File.WriteAllLines(guestsPath, updatedLines);
+                        break;
+
+                }
+            }
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            cmbEditDel.Visibility = Visibility.Visible;
+            btnAccept.Visibility = Visibility.Visible;
+            lblRefNumber.Visibility = Visibility.Visible;
+            txtRefNumber.Visibility = Visibility.Visible;
+
+            switch (cmbAmendChoice.SelectedIndex)
+            {
+                case -1:
+                    break;
+                case 0:
+                    cmbEditDel.Items.Clear();
+                    cmbEditDel.Items.Add("Edit Customer");
+                    selectedItem = 0;
+                    break;
+                case 1:
+                    cmbEditDel.Items.Clear();
+                    cmbEditDel.Items.Add("Edit Booking");
+                    selectedItem = 1;
+                    break;
+                case 2:
+                    cmbEditDel.Items.Clear();
+                    cmbEditDel.Items.Add("Edit Guests");
+                    selectedItem = 2;
+                    break;
+                case 3:
+                    cmbEditDel.Items.Clear();
+                    cmbEditDel.Items.Add("Add Extras");
+                    cmbEditDel.Items.Add("Remove Extras");
+                    selectedItem = 3;
+                    break;
+            }
+        }
+        
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            int temp;
+            if (txtRefNumber.Text != "" && int.TryParse(txtRefNumber.Text, out temp)) 
+            {
+                lblSelect.Visibility = Visibility.Visible;
+                cmbSelect.Visibility = Visibility.Visible;
+                lblNewValue.Visibility = Visibility.Visible;
+                txtNewValue.Visibility = Visibility.Visible;
+                btnSaveChanges.Visibility = Visibility.Visible;
+
+                if (selectedItem == 0)
+                {
+                    lblSelect.Content = "Edit Customer:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("First Name");
+                    cmbSelect.Items.Add("Last Name");
+                    cmbSelect.Items.Add("Address");
+                    lblGuestValue.Visibility = Visibility.Hidden;
+                    txtGuestsValue.Visibility = Visibility.Hidden;
+                }
+
+                if (selectedItem == 1)
+                {
+                    lblSelect.Content = "Edit Booking:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("Arrival Date");
+                    cmbSelect.Items.Add("Departure Date");
+                    lblGuestValue.Visibility = Visibility.Hidden;
+                    txtGuestsValue.Visibility = Visibility.Hidden;
+                }
+
+                if (selectedItem == 2)
+                {
+                    lblSelect.Content = "Edit Guests:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("First Name");
+                    cmbSelect.Items.Add("Last Name");
+                    cmbSelect.Items.Add("Passport Number");
+                    cmbSelect.Items.Add("Age");
+                    lblGuestValue.Visibility = Visibility.Visible;
+                    txtGuestsValue.Visibility = Visibility.Visible;
+                }
+
+                if (selectedItem == 3)
+                {
+                    lblSelect.Content = "Edit Extras:";
+                    cmbSelect.Items.Clear();
+                    cmbSelect.Items.Add("Add Breakfast Meals");
+                    cmbSelect.Items.Add("Add Evening Meals");
+                    cmbSelect.Items.Add("Add Car Hire");
+                    lblNewValue.Content = "For amount of Days:";
+                    lblGuestValue.Visibility = Visibility.Hidden;
+                    txtGuestsValue.Visibility = Visibility.Hidden;
+                }
+            } else
+            {
+                MessageBox.Show("Reference Number field cannot be blank!");
+            }
+        }
+
+        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            editCustomer();
+            editBooking();
+            editGuests();
         }
     }
 }
