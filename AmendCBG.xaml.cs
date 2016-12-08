@@ -25,11 +25,12 @@ namespace CW2
         string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
         string bookPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
         string guestsPath = @"D:\Coursework 2\Coursework2\Records\Guest Records.txt";
+        string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
         List<string> updatedLines = new List<string>();
         string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
         string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
         string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
-        //string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
+        string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
         string[] words;
 
         public AmendCBG()
@@ -235,6 +236,36 @@ namespace CW2
             }
         }
 
+        public void editExtras()
+        {
+            if (lblSelect.Content.ToString() == "Edit Extras:")
+            {
+                switch (cmbSelect.SelectedIndex)
+                {
+                    case -1:
+                        break;
+                    case 0:
+                        updatedLines.Clear();
+                        foreach (string line in extrasLines)
+                        {
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))
+                            {
+                                words = line.Split(' ');
+                                if (line.Contains("BK:"))
+                                {
+                                    string temp = line.Insert(27, txtNewValue.Text + ", ");
+                                    updatedLines.Add(temp);
+                                }
+                                continue;
+                            }
+                            updatedLines.Add(line);
+                        }
+                        File.WriteAllLines(extrasPath, updatedLines);
+                        break;
+                }
+            }
+        }
+
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             cmbEditDel.Visibility = Visibility.Visible;
@@ -336,6 +367,7 @@ namespace CW2
             editCustomer();
             editBooking();
             editGuests();
+            editExtras();
         }
     }
 }
