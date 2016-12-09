@@ -17,7 +17,7 @@ namespace CW2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// </summary> 
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -33,7 +33,7 @@ namespace CW2
 
         private void btnExtras_Click(object sender, RoutedEventArgs e)
         {
-            Extras extra = new Extras();
+            ExtrasPrompt extra = new ExtrasPrompt();
             extra.Show();
         }
 
@@ -45,17 +45,20 @@ namespace CW2
 
         private void btnDelCustomer_Click(object sender, RoutedEventArgs e)
         {
-            
+            DeleteCustomer del1 = new DeleteCustomer();
+            del1.Show();
         }
 
         private void btnDelBooking_Click(object sender, RoutedEventArgs e)
         {
-            
+            DeleteBooking delbook1 = new DeleteBooking();
+            delbook1.Show();
         }
 
         private void btnAmendCBG_Click(object sender, RoutedEventArgs e)
         {
-
+            AmendCBG amend1 = new AmendCBG();
+            amend1.Show();
         }
     }
 }

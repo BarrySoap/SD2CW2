@@ -266,6 +266,23 @@ namespace CW2
             }
         }
 
+        public void removeExtras()
+        {
+            updatedLines.Clear();
+            foreach (string line in extrasLines)
+            {
+                if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))
+                {
+                    words = line.Split(' ');
+                    string temp = line.Replace("EVE:" + txtNewValue.Text, "");
+                    updatedLines.Add(temp);
+                    continue;
+                }
+                updatedLines.Add(line);
+            }
+            File.WriteAllLines(extrasPath, updatedLines);
+        }
+
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             cmbEditDel.Visibility = Visibility.Visible;
@@ -364,10 +381,23 @@ namespace CW2
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            editCustomer();
-            editBooking();
-            editGuests();
-            editExtras();
+            if (txtNewValue.Text != "")
+            {
+                editCustomer();
+                editBooking();
+                editGuests();
+                if (cmbEditDel.SelectedIndex == 1)
+                {
+                    removeExtras();
+                }
+                else if (cmbEditDel.SelectedIndex == 0)
+                {
+                    editExtras();
+                }
+            } else
+            {
+                MessageBox.Show("The new value field cannot be blank!");
+            }
         }
     }
 }

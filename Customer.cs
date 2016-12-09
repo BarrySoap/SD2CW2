@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,6 @@ namespace CW2
         private string customerSecondName;
         private string customerAddress;
         private double custRefNumber = 0;
-
         public string CustomerFirstName
         {
             get { return customerFirstName; }
