@@ -18,7 +18,7 @@ namespace CW2
     public partial class CBG : Window
     {
         Guests guest1 = new Guests();                               // Creating objects for guests,
-        Booking book1 = new Booking();                              //                      bookings,
+        Booking book1 = Booking.Instance;                           //                      bookings,
         Customer cust1 = new Customer();                            //                  and customers. This allows the class to manipulate the classes variables.
         private string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
         private string bookingPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
@@ -236,7 +236,7 @@ namespace CW2
                 {
                     if (noOfGuests != 4)
                     {
-                        if (txtCBG2.Text.Length <= 10)
+                        if (txtCBG2.Text.Length <= 10 || int.Parse(txtCBG3.Text) < 0 || int.Parse(txtCBG3.Text) > 101)
                         {
                             guest1.GuestFirstName = txtCBG1.Text;
                             guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
@@ -256,7 +256,7 @@ namespace CW2
                             }
                         } else
                         {
-                            MessageBox.Show("Passport number must be valid!");
+                            MessageBox.Show("The passport number must be valid, and ages must be between 0-101");
                         }
                     } else
                     {

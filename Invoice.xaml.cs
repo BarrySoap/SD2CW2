@@ -19,7 +19,7 @@ namespace CW2
     public partial class Invoice : Window
     {
         Customer cust1 = new Customer();
-        Booking book1 = new Booking();
+        Booking book1 = Booking.Instance;
         Guests guest1 = new Guests();
         Extras extra1 = new Extras();
         string dietaryResq;
@@ -128,18 +128,27 @@ namespace CW2
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             double temp;
+            string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
             getCosts();
-            if (txtBRefNumber.Text != "" && Double.TryParse(txtBRefNumber.Text, out temp))
+            if (contents.Contains("-For Booking Reference: " + txtBRefNumber.Text + "-"))
             {
-                lblInvoice.Content = "Overall booking cost: " + totalCost.ToString() + "\n";
-                lblInvoice.Content += "Breakfast Dietary Requirements: " + "\n" + breakfastResq + "\n";
-                lblInvoice.Content += "Evening Meals Dietary Requirements: " + "\n" + dietaryResq + "\n";
-                lblInvoice.Content += "Driver Name: " + "\n" + driverName + "\n";
+                if (txtBRefNumber.Text != "" && Double.TryParse(txtBRefNumber.Text, out temp))
+                {
+                    lblInvoice.Content = "Overall booking cost: " + totalCost.ToString() + "\n";
+                    lblInvoice.Content += "Breakfast Dietary Requirements: " + "\n" + breakfastResq + "\n";
+                    lblInvoice.Content += "Evening Meals Dietary Requirements: " + "\n" + dietaryResq + "\n";
+                    lblInvoice.Content += "Driver Name: " + "\n" + driverName + "\n";
 
-            } else
-            {
-                MessageBox.Show("The booking reference number must be valid!");
+                } else
+                {
+                    MessageBox.Show("Booking reference number must be valid!");
+                }
             }
+            else
+            {
+                MessageBox.Show("Booking does not exist!");
+            }
+             
         }
     }
 }

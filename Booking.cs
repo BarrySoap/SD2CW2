@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,26 @@ namespace CW2
     {
         private DateTime arrivalDate = DateTime.MinValue;           // Values are initialised as
         private DateTime departureDate = DateTime.MinValue;         // "01 January 0001"
-        private double refNumber = 0;
+        private double refNumber = 1;
+
+        private static Booking instance;
+
+        private Booking()
+        {
+
+        }
+
+        public static Booking Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Booking();
+                }
+                return instance;
+            }
+        }
 
         public DateTime ArrivalDate
         {
