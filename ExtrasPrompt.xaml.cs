@@ -20,7 +20,7 @@ namespace CW2
     /// </summary>
     public partial class ExtrasPrompt : Window
     {
-        private string extrasPath = @"F:\Coursework 2\Coursework2\Records\Extras Records.txt";
+        private string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
 
         public ExtrasPrompt()
         {
@@ -56,20 +56,26 @@ namespace CW2
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
             int temp;
             if (txtReturnRef.Text.Length != 0 && int.TryParse(txtReturnRef.Text, out temp) == true)
             {
-                using (StreamWriter sw = File.AppendText(extrasPath))
+                if (contents.Contains("-For Booking Reference: " + txtReturnRef.Text + "-"))
                 {
-                    sw.Write("-For Booking Reference: " + txtReturnRef.Text + "- ");
+                    using (StreamWriter sw = File.AppendText(extrasPath))
+                    {
+                        sw.Write("-For Booking Reference: " + txtReturnRef.Text + "- ");
+                    }
+                    Extras extra1 = new Extras();
+                    extra1.Show();
+                } else
+                {
+                    MessageBox.Show("Booking does not exist!");
                 }
             } else
             {
                 MessageBox.Show("The reference box cannot be blank or invalid!");
             }
-
-            Extras extra1 = new Extras();
-            extra1.Show();
         }
     }
 }
