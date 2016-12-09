@@ -6,13 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Author: Glenn Wilkie-Sullivan (40208762)
+ * Class Purpose: Contains methods for checking the existence of booking/customer records,
+ *                as well as methods for deleting them respectively.
+ * Date last modified: 09/12/2016
+ */
+
 namespace CW2
 {
     class DeletionHelp
     {
-        string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
-        string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
+        string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");         // Initialise the path of the customer file.
+        string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");          // Initialise the path of the booking file.
 
+        //****************** This method checks whether a customer exists or not within the record file. *******/
         public void checkCustomerValidity(double custRefNumber)
         {
             string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
@@ -25,7 +32,9 @@ namespace CW2
                 MessageBox.Show("Customer does not exist.");
             }
         }
+        //******************************************************************************************************/
 
+        //****************** This method checks whether a booking exists or not within the record file. *******/
         public void checkBookingValidity(double bookRefNumber)
         {
             string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
@@ -38,7 +47,9 @@ namespace CW2
                 MessageBox.Show("Booking does not exist.");
             }
         }
+        //******************************************************************************************************/
 
+        //*** This method will recursively check for a customer record, and then delete the appropriate one. ***/
         public void deleteCust(string path, double custRefNumber)
         {
             using (StreamWriter sw = new StreamWriter(path))
@@ -52,7 +63,9 @@ namespace CW2
                 }
             }
         }
+        //******************************************************************************************************/
 
+        //**** This method will recursively check for a booking record, and then delete the appropriate one. ***/
         public void deleteBooking(string path, double bookRefNumber)
         {
             using (StreamWriter sw = new StreamWriter(path))
@@ -66,5 +79,6 @@ namespace CW2
                 }
             }
         }
+        //******************************************************************************************************/
     }
 }
