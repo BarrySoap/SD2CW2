@@ -20,7 +20,7 @@ namespace CW2
     /// </summary>
     public partial class Extras : Window
     {
-        private string extrasPath = @"F:\Coursework 2\Coursework2\Records\Extras Records.txt";
+        private string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
         public string eveningRequirements;
         public string breakfastRequirements;
         public string hireStartDate;
@@ -34,7 +34,7 @@ namespace CW2
             {
                 using (StreamWriter sw = File.CreateText(extrasPath))
                 {
-                    sw.WriteLine("Evening Meals Dietary Requirements (EM), Breakfast Dietary Requirements (BF), Car Hire (CH)" + Environment.NewLine);
+                    sw.WriteLine("Evening Meals Dietary Requirements (EVE:), Breakfast Dietary Requirements (BK:), Car Hire (DN:)" + Environment.NewLine);
                 }
             }
             hideOptions();
@@ -112,7 +112,7 @@ namespace CW2
                 eveningRequirements = txtEveningDietary.Text;
                 using (StreamWriter sw = File.AppendText(extrasPath))
                 {
-                    sw.Write(eveningRequirements + ", ");
+                    sw.Write("EVE:" + eveningRequirements + ", ");
                 }
             }
 
@@ -124,27 +124,25 @@ namespace CW2
                 breakfastRequirements = txtBreakDietary.Text;
                 using (StreamWriter sw = File.AppendText(extrasPath))
                 {
-                    sw.Write(breakfastRequirements + ", ");
+                    sw.Write("BK:" + breakfastRequirements + ", ");
                 }
             }
 
-            if (checkCarHire.IsChecked == true && dpStartDate.SelectedDate == null && dpEndDate.SelectedDate == null && txtDriverName.Text.Length == 0)
+            if (checkCarHire.IsChecked == true)
             {
-                MessageBox.Show("As you have checked the box for car hire, the encompassed fields cannot be blank!");
-            } else
-            {
-                hireStartDate = dpStartDate.Text;
-                hireEndDate = dpEndDate.Text;
-                driverName = txtDriverName.Text;
-                using (StreamWriter sw = File.AppendText(extrasPath))
+                if (dpStartDate.SelectedDate == null || dpEndDate.SelectedDate == null || txtDriverName.Text.Length == 0)
                 {
-                    sw.Write(driverName + ", " + (DateTime.Parse(hireEndDate) - DateTime.Parse(hireStartDate)).TotalDays);
+                    MessageBox.Show("As you have checked the box for car hire, the encompassed fields cannot be blank!");
+                } else
+                {
+                    hireStartDate = dpStartDate.Text;
+                    hireEndDate = dpEndDate.Text;
+                    driverName = txtDriverName.Text;
+                    using (StreamWriter sw = File.AppendText(extrasPath))
+                    {
+                        sw.Write("DN:" + driverName + ", " + (DateTime.Parse(hireEndDate) - DateTime.Parse(hireStartDate)).TotalDays + Environment.NewLine + Environment.NewLine);
+                    }
                 }
-            }
-
-            using (StreamWriter sw = File.AppendText(extrasPath))
-            {
-                sw.Write(Environment.NewLine + Environment.NewLine);
             }
         }
     }
