@@ -236,20 +236,27 @@ namespace CW2
                 {
                     if (noOfGuests != 4)
                     {
-                        guest1.GuestFirstName = txtCBG1.Text;
-                        guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
-                        guest1.GuestPassNumber = txtCBG2.Text;
-                        int temp;
-                        if (int.TryParse(txtCBG3.Text, out temp))
+                        if (txtCBG2.Text.Length <= 10)
                         {
-                            guest1.GuestAge = int.Parse(txtCBG3.Text);                                          // Parse the text box content (string) to an int.
-                        }
-                        noOfGuests = noOfGuests + 1;
-                        using (StreamWriter sw = File.AppendText(guestsPath))
+                            guest1.GuestFirstName = txtCBG1.Text;
+                            guest1.GuestSecondName = txtCBG1_5.Text;                                                // Update the object variables.
+                            guest1.GuestPassNumber = txtCBG2.Text;
+                            int temp;
+                            if (int.TryParse(txtCBG3.Text, out temp))
+                            {
+                                guest1.GuestAge = int.Parse(txtCBG3.Text);                                          // Parse the text box content (string) to an int.
+                            }
+                            noOfGuests = noOfGuests + 1;
+                            MessageBox.Show("Guest added to booking!");
+                            using (StreamWriter sw = File.AppendText(guestsPath))
+                            {
+                                sw.WriteLine("-For Booking Reference: " + (book1.RefNumber - 1) + "- " +
+                                             guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge +
+                                             Environment.NewLine + Environment.NewLine);
+                            }
+                        } else
                         {
-                            sw.WriteLine("-For Booking Reference: " + (book1.RefNumber - 1) + "- " + 
-                                         guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge + 
-                                         Environment.NewLine + Environment.NewLine);
+                            MessageBox.Show("Passport number must be valid!");
                         }
                     } else
                     {
