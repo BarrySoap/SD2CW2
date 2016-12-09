@@ -13,24 +13,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+/* Author: Glenn Wilkie-Sullivan (40208762)
+ * Class Purpose: Contains logic for deleting a customer, with the help of a facade class.
+ * Date last modified: 09/12/2016
+ */
+
 namespace CW2
 {
-    /// <summary>
-    /// Interaction logic for DeleteCustomer.xaml
-    /// </summary>
     public partial class DeleteCustomer : Window
     {
-        public string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+        public string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";         // Initialise the path of the record file.
 
         public DeleteCustomer()
         {
             InitializeComponent();
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)                                   // When the 'submit' button is pressed,
         {
-            Facade facade = new Facade();
-            facade.deleteCustomer(double.Parse(txtReferenceNumber.Text));
+            Facade facade = new Facade();                                                                // Initialise a facade object,
+            facade.deleteCustomer(double.Parse(txtReferenceNumber.Text));                                // then call on a method to delete a customer within the facade.
         }
     }
 }
