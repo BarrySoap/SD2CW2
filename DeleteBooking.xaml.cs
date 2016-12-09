@@ -20,9 +20,7 @@ namespace CW2
     /// </summary>
     public partial class DeleteBooking : Window
     {
-        private string bookingPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
-        string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
-        string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
+        public string bookingPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
 
         public DeleteBooking()
         {
@@ -31,22 +29,8 @@ namespace CW2
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (contents.Contains("-For Booking Reference: " + txtReferenceNumber.Text + "-"))
-            {
-                using (StreamWriter sw = new StreamWriter(bookingPath))
-                {
-                    foreach (string line in bookLines)
-                    {
-                        if (!line.Contains("-For Booking Reference: " + txtReferenceNumber.Text + "-"))
-                        {
-                            sw.WriteLine(line);
-                        }
-                    }
-                }
-            } else
-            {
-                MessageBox.Show("Booking does not exist!");
-            }
+            Facade facade = new Facade();
+            facade.deleteBooking(double.Parse(txtReferenceNumber.Text));
         }
     }
 }

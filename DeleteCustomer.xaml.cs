@@ -20,9 +20,7 @@ namespace CW2
     /// </summary>
     public partial class DeleteCustomer : Window
     {
-        private string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
-        string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
-        string contents = File.ReadAllText(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
+        public string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
 
         public DeleteCustomer()
         {
@@ -31,22 +29,8 @@ namespace CW2
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (contents.Contains("-For Customer Reference: " + txtReferenceNumber.Text + "-"))
-            {
-                using (StreamWriter sw = new StreamWriter(customerPath))
-                {
-                    foreach (string line in custLines)
-                    {
-                        if (!line.Contains("-For Customer Reference: " + txtReferenceNumber.Text + "-"))
-                        {
-                            sw.WriteLine(line);
-                        }
-                    }
-                }
-            } else
-            {
-                MessageBox.Show("Customer does not exist!");
-            }
+            Facade facade = new Facade();
+            facade.deleteCustomer(double.Parse(txtReferenceNumber.Text));
         }
     }
 }
