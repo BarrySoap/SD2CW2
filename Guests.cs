@@ -5,14 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
+/* Author: Glenn Wilkie-Sullivan (40208762)
+ * Class Purpose: Contains values/properties for guests.
+ * Date last modified: 09/12/2016
+ */
+
 namespace CW2
 {
     class Guests
     {
-        private string guestFirstName;
-        private string guestSecondName;
-        private string guestPassNumber;
-        private int guestAge;
+        private string guestFirstName;               // Create attributes for the guest(s) first name(s),
+        private string guestSecondName;              // last name(s)
+        private string guestPassNumber;              // passport number(s),
+        private int guestAge;                        // and age(s).
 
         public string GuestFirstName
         {
