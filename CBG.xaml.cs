@@ -26,6 +26,7 @@ namespace CW2
         private string bookRefPath = @"D:\Coursework 2\Coursework2\Records\BookingRefNumber.txt";
         private string custRefPath = @"D:\Coursework 2\Coursework2\Records\CustomerRefNumber.txt";
         private int noOfGuests = 0;
+        private int temp;
 
         public CBG()
         {
@@ -169,28 +170,38 @@ namespace CW2
             {
                 if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "")                       // Check if the first/last name and address text boxes aren't blank.
                 {
-                    cust1.CustomerFirstName = txtCBG1.Text;
-                    cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If not, update the object variables with the values of the text boxes.
-                    cust1.CustomerAddress = txtCBG2.Text;
-                    MessageBox.Show("Your customer reference number is: " + cust1.CustRefNumber);
-                    using (StreamWriter sw = File.AppendText(customerPath))
+                    if (int.TryParse(txtCBG1.Text, out temp) || int.TryParse(txtCBG1_5.Text, out temp) || int.TryParse(txtCBG2.Text, out temp))
                     {
-                        sw.WriteLine("-For Customer Reference: " + cust1.CustRefNumber + "-" + Environment.NewLine + 
-                                     cust1.CustomerFirstName + ", " + cust1.CustomerSecondName + ", " + cust1.CustomerAddress + 
-                                     Environment.NewLine + Environment.NewLine);
-                    }
-                    using (StreamWriter sw = new StreamWriter(custRefPath, false))
+                        MessageBox.Show("The above fields must be valid!");
+                    } else
                     {
-                        sw.WriteLine(cust1.CustRefNumber.ToString());
+                        cust1.CustomerFirstName = txtCBG1.Text;
+                        cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If not, update the object variables with the values of the text boxes.
+                        cust1.CustomerAddress = txtCBG2.Text;
+                        MessageBox.Show("Your customer reference number is: " + cust1.CustRefNumber);
+
+                        using (StreamWriter sw = File.AppendText(customerPath))
+                        {
+                            sw.WriteLine("-For Customer Reference: " + cust1.CustRefNumber + "- " +
+                                         cust1.CustomerFirstName + ", " + cust1.CustomerSecondName + ", " + cust1.CustomerAddress +
+                                         Environment.NewLine + Environment.NewLine);
+                        }
+
+                        using (StreamWriter sw = new StreamWriter(custRefPath, false))
+                        {
+                            sw.WriteLine(cust1.CustRefNumber.ToString());
+                        }
+
+                        using (StreamWriter sw = new StreamWriter(custRefPath, false))
+                        {
+                            sw.WriteLine(cust1.CustRefNumber.ToString());
+                        }
+
+                        cust1.CustRefNumber = cust1.CustRefNumber + 1;
                     }
-                    using (StreamWriter sw = new StreamWriter(custRefPath, false))
-                    {
-                        sw.WriteLine(cust1.CustRefNumber.ToString());
-                    }
-                    cust1.CustRefNumber = cust1.CustRefNumber + 1;
                 } else
                 {
-                    MessageBox.Show("The above fields must be valid/not blank!");                           // An error is thrown if any of the text boxes are blank.
+                    MessageBox.Show("The above fields must not be blank!");                           // An error is thrown if any of the text boxes are blank.
                 }
             } 
 
@@ -205,7 +216,7 @@ namespace CW2
                     MessageBox.Show("Your booking reference number is: " + book1.RefNumber);
                     using (StreamWriter sw = File.AppendText(bookingPath))
                     {
-                        sw.WriteLine("-For Booking Reference: " + book1.RefNumber + "-" + Environment.NewLine + 
+                        sw.WriteLine("-For Booking Reference: " + book1.RefNumber + "- " + 
                                      book1.ArrivalDate + ", " + book1.DepartureDate + Environment.NewLine + Environment.NewLine);
                     }
                     using (StreamWriter sw = new StreamWriter(bookRefPath, false))
@@ -236,7 +247,7 @@ namespace CW2
                         noOfGuests = noOfGuests + 1;
                         using (StreamWriter sw = File.AppendText(guestsPath))
                         {
-                            sw.WriteLine("-For Booking Reference: " + book1.RefNumber + "-" + Environment.NewLine + 
+                            sw.WriteLine("-For Booking Reference: " + (book1.RefNumber - 1) + "- " + 
                                          guest1.GuestFirstName + ", " + guest1.GuestSecondName + ", " + guest1.GuestPassNumber + ", " + guest1.GuestAge + 
                                          Environment.NewLine + Environment.NewLine);
                         }
