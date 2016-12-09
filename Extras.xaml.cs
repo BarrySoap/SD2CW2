@@ -13,33 +13,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+/* Author: Glenn Wilkie-Sullivan (40208762)
+ * Class Purpose: Contains logic for adding extras to a booking.
+ * Date last modified: 09/12/2016
+ */
+
 namespace CW2
 {
-    /// <summary>
-    /// Interaction logic for Extras.xaml
-    /// </summary>
     public partial class Extras : Window
     {
-        private string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
-        public string eveningRequirements;
-        public string breakfastRequirements;
-        public string hireStartDate;
-        public string hireEndDate;
-        public string driverName;
+        private string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";         // Initialise the path of the record file.
+
+        //******* Initialise variables for an extras record. ******/
+        private string eveningRequirements;
+        private string breakfastRequirements;
+        private string hireStartDate;
+        private string hireEndDate;
+        private string driverName;
+        //*********************************************************/
 
         public Extras()
         {
             InitializeComponent();
-            if (!File.Exists(extrasPath))
+            if (!File.Exists(extrasPath))                               // If the extras record file doesn't exist,
             {
                 using (StreamWriter sw = File.CreateText(extrasPath))
-                {
+                {                                                       // it will be created with some helping text.
                     sw.WriteLine("Evening Meals Dietary Requirements (EVE:), Breakfast Dietary Requirements (BK:), Car Hire (DN:)" + Environment.NewLine);
                 }
             }
             hideOptions();
         }
-        
+
+        //*********** This method will hide specific variables until they are needed in the GUI ******************/
         public void hideOptions()
         {
             dpStartDate.Visibility = Visibility.Hidden;
@@ -54,6 +60,7 @@ namespace CW2
             txtEveningDietary.IsEnabled = false;
             txtBreakDietary.IsEnabled = false;
         }
+        //********************************************************************************************************/
 
         private void checkMeals_Checked(object sender, RoutedEventArgs e)
         {
