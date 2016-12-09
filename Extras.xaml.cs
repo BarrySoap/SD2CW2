@@ -104,27 +104,33 @@ namespace CW2
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (checkMeals.IsChecked == true && txtEveningDietary.Text.Length == 0)             // Check if the user has asked for evening meals, but left the dietary field blank.
+            if (checkMeals.IsChecked == true)             // Check if the user has asked for evening meals, but left the dietary field blank.
             {
-                MessageBox.Show("As you have checked the box for evening meals, please enter some dietary requirements! If none, type N/A.");
-            } else
-            {
-                eveningRequirements = txtEveningDietary.Text;
-                using (StreamWriter sw = File.AppendText(extrasPath))
+                if (txtEveningDietary.Text.Length == 0 || txtEveningDietary.Text == "Add any dietary requirements here!")
                 {
-                    sw.Write("EVE:" + eveningRequirements + ", ");
+                    MessageBox.Show("As you have checked the box for evening meals, please enter some dietary requirements! If none, type N/A.");
+                } else
+                {
+                    eveningRequirements = txtEveningDietary.Text;
+                    using (StreamWriter sw = File.AppendText(extrasPath))
+                    {
+                        sw.Write("EVE:" + eveningRequirements + ", ");
+                    }
                 }
-            }
+            } 
 
-            if (checkBreakfast.IsChecked == true && txtBreakDietary.Text.Length == 0)           // Same as above, with breakfast.
+            if (checkBreakfast.IsChecked == true)           // Same as above, with breakfast.
             {
-                MessageBox.Show("As you have checked the box for breakfast, please enter some dietary requirements! If none, type N/A.");
-            } else
-            {
-                breakfastRequirements = txtBreakDietary.Text;
-                using (StreamWriter sw = File.AppendText(extrasPath))
+                if (txtBreakDietary.Text.Length == 0 || txtBreakDietary.Text == "Add any dietary requirements here!")
                 {
-                    sw.Write("BK:" + breakfastRequirements + ", ");
+                    MessageBox.Show("As you have checked the box for breakfast, please enter some dietary requirements! If none, type N/A.");
+                } else
+                {
+                    breakfastRequirements = txtBreakDietary.Text;
+                    using (StreamWriter sw = File.AppendText(extrasPath))
+                    {
+                        sw.Write("BK:" + breakfastRequirements + ", ");
+                    }
                 }
             }
 
