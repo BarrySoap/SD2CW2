@@ -16,22 +16,27 @@ using System.Windows.Shapes;
 
 namespace CW2
 {
-    /// <summary>
-    /// Interaction logic for AmendCBG.xaml
-    /// </summary>
     public partial class AmendCBG : Window
     {
-        int selectedItem = 0;
-        string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
-        string bookPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
-        string guestsPath = @"D:\Coursework 2\Coursework2\Records\Guest Records.txt";
-        string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
-        List<string> updatedLines = new List<string>();
-        string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
-        string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
-        string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
-        string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
-        string[] words;
+        private int selectedItem = 0;   // This variable is used to edit the items of a combo box, filing down user input.
+
+        //*************/ Variables used to allow the program to find files. /****************/
+        private string custPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
+        private string bookPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
+        private string guestsPath = @"D:\Coursework 2\Coursework2\Records\Guest Records.txt";
+        private string extrasPath = @"D:\Coursework 2\Coursework2\Records\Extras Records.txt";
+        //***********************************************************************************/ 
+
+        private List<string> updatedLines = new List<string>();   // This variable is used to store the content a new file after updating.
+
+        //*************************/ Variables used to store the content of files. /******************************/
+        private string[] custLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Customer Records.txt");
+        private string[] bookLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Booking Records.txt");
+        private string[] guestLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Guest Records.txt");
+        private string[] extrasLines = File.ReadAllLines(@"D:\Coursework 2\Coursework2\Records\Extras Records.txt");
+        //********************************************************************************************************/
+
+        private string[] words;   // This variable is used to split a specific line, which allows us to select a word by index.
 
         public AmendCBG()
         {
@@ -39,6 +44,7 @@ namespace CW2
             hideOptions();
         }
 
+        //This method will hide specific variables until they are needed in the GUI
         public void hideOptions()
         {
             lblRefNumber.Visibility = Visibility.Hidden;
@@ -53,23 +59,40 @@ namespace CW2
             lblGuestValue.Visibility = Visibility.Hidden;
             txtGuestsValue.Visibility = Visibility.Hidden;
         }
+        //********************************************/
 
         public void editCustomer()
         {
-            if (lblSelect.Content.ToString() == "Edit Customer:")
-            {
-                switch (cmbSelect.SelectedIndex)
+            if (lblSelect.Content.ToString() == "Edit Customer:")                                       // This will check if the user has asked to change the 
+            {                                                                                           // attributes of a customer.
+                switch (cmbSelect.SelectedIndex)                                                        // Using the selected option in the combo box (SelectedIndex)
                 {
-                    case -1:
+                    case -1:                                                                            // Break if the selected option is the default (blank)
                         break;
-                    case 0:
-                        updatedLines.Clear();
+                    case 0:                                                                             // If the user has asked to change the first name (at index 0),
+                        updatedLines.Clear();                                                           // Clear the new content of the file from previous inputs.
+                        foreach (string line in custLines)                                              // Recursively check each line of the customer record
+                        {
+                            if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))   // for a line containing "-For Customer Reference: " and the
+                            {                                                                           // specified reference number.
+                                words = line.Split(' ');                                                // When found, split the line into separate words.
+                                string temp = line.Replace(words[4], txtNewValue.Text + ",");           // Replace the word at index 4 (always first name) with the new requested value.
+                                updatedLines.Add(temp);                                                 // Add the updated line to the new content of the file.
+                                continue;                                                               // Exit the current iteration of the foreach loop.
+                            }
+                            updatedLines.Add(line);                                                     // This will keep each line of the original file, as well as changing the updated line.
+                        }
+
+                        File.WriteAllLines(custPath, updatedLines);                                     // Write all lines back to the original file path.
+                        break;
+                    case 1:                                                                             // If the user has asked to change the second name (at index 1),
+                        updatedLines.Clear();                                                           // Clear the new content of the file from previous inputs.
                         foreach (string line in custLines)
                         {
                             if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
                             {
                                 words = line.Split(' ');
-                                string temp = line.Replace(words[4], txtNewValue.Text + ",");
+                                string temp = line.Replace(words[5], txtNewValue.Text + ",");           // Same as before, but replace the word at index 5 (always second name due to validation logic)
                                 updatedLines.Add(temp);
                                 continue;
                             }
@@ -78,32 +101,16 @@ namespace CW2
 
                         File.WriteAllLines(custPath, updatedLines);
                         break;
-                    case 1:
-                        updatedLines.Clear();
-                        foreach (string line in custLines)
-                        {
-                            if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
-                            {
-                                words = line.Split(' ');
-                                string temp = line.Replace(words[5], txtNewValue.Text + ",");
-                                updatedLines.Add(temp);
-                                continue;
-                            }
-                            updatedLines.Add(line);
-                        }
-
-                        File.WriteAllLines(custPath, updatedLines);
-                        break;
-                    case 2:
-                        updatedLines.Clear();
+                    case 2:                                                                             // If the user has asked to change the address (at index 2),
+                        updatedLines.Clear();                                                           // Clear the new content of the file from previous inputs.
                         foreach (string line in custLines)
                         {
                             if (line.Contains("-For Customer Reference: " + txtRefNumber.Text + "-"))
                             {
                                 words = line.Split(' ');
                                 string[] words2 = txtNewValue.Text.Split(' ');
-                                string temp = line.Replace(words[6], words2[0]).Replace(words[7], words2[1]).Replace(words[8], words2[2]);
-                                updatedLines.Add(temp);
+                                string temp = line.Replace(words[6], words2[0]).Replace(words[7], words2[1]).Replace(words[8], words2[2]);      // This will take the 3 words of the existing address value
+                                updatedLines.Add(temp);                                                                                         // and replace them respectively with the new value in the file.
                                 continue;
                             }
                             updatedLines.Add(line);
@@ -117,29 +124,29 @@ namespace CW2
 
         public void editBooking()
         {
-            if (lblSelect.Content.ToString() == "Edit Booking:")
-            {
-                switch (cmbSelect.SelectedIndex)
+            if (lblSelect.Content.ToString() == "Edit Booking:")                                        // This will check if the user has asked to change the 
+            {                                                                                           // attributes of a booking.
+                switch (cmbSelect.SelectedIndex)                                                        // Using the selected option in the combo box (SelectedIndex)
                 {
-                    case -1:
+                    case -1:                                                                            // Break if the selected option is the default (blank)
                         break;
-                    case 0:
-                        updatedLines.Clear();
-                        foreach (string line in bookLines)
+                    case 0:                                                                             // If the user has asked to change the arrival date (at index 0),
+                        updatedLines.Clear();                                                           // Clear the new content of the file from previous inputs.
+                        foreach (string line in bookLines)                                              // Recursively check each line of the booking record
                         {
-                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))
-                            {
-                                words = line.Split(' ');
-                                string temp = line.Replace(words[4], txtNewValue.Text + ",");
-                                updatedLines.Add(temp);
-                                continue;
+                            if (line.Contains("-For Booking Reference: " + txtRefNumber.Text + "-"))    // for a line containing "-For Customer Reference: " and the
+                            {                                                                           // specified reference number.
+                                words = line.Split(' ');                                                // When found, split the line into separate words.
+                                string temp = line.Replace(words[4], txtNewValue.Text + ",");           // Replace the word at index 4 (always first name) with the new requested value.
+                                updatedLines.Add(temp);                                                 // Add the updated line to the new content of the file.
+                                continue;                                                               // Exit the current iteration of the foreach loop.
                             }
-                            updatedLines.Add(line);
+                            updatedLines.Add(line);                                                     // This will keep each line of the original file, as well as changing the updated line.
                         }
 
-                        File.WriteAllLines(bookPath, updatedLines);
+                        File.WriteAllLines(bookPath, updatedLines);                                     // Write all lines back to the original file path.
                         break;
-                    case 1:
+                    case 1:                                                                             // Check if the user has asked to change the departure date (at index 1)
                         updatedLines.Clear();
                         foreach (string line in bookLines)
                         {
@@ -161,13 +168,13 @@ namespace CW2
 
         public void editGuests()
         {
-            if (lblSelect.Content.ToString() == "Edit Guests:")
-            {
+            if (lblSelect.Content.ToString() == "Edit Guests:")                                         // This will check if the user has asked to change the 
+            {                                                                                           // attributes of their guest(s).
                 switch (cmbSelect.SelectedIndex)
                 {
                     case -1:
                         break;
-                    case 0:
+                    case 0:                                                                             // Check if the user has asked to change the guest(s) first name (at index 0)
                         updatedLines.Clear();
                         foreach (string line in guestLines)
                         {
@@ -183,7 +190,7 @@ namespace CW2
 
                         File.WriteAllLines(guestsPath, updatedLines);
                         break;
-                    case 1:
+                    case 1:                                                                             // Check if the user has asked to change the guest(s) second name (at index 1)
                         updatedLines.Clear();
                         foreach (string line in guestLines)
                         {
@@ -199,7 +206,7 @@ namespace CW2
 
                         File.WriteAllLines(guestsPath, updatedLines);
                         break;
-                    case 2:
+                    case 2:                                                                             // Check if the user has asked to change the guest(s) passport number (at index 2)
                         updatedLines.Clear();
                         foreach (string line in guestLines)
                         {
@@ -215,7 +222,7 @@ namespace CW2
 
                         File.WriteAllLines(guestsPath, updatedLines);
                         break;
-                    case 3:
+                    case 3:                                                                             // Check if the user has asked to change the guest(s) age (at index 3)
                         updatedLines.Clear();
                         foreach (string line in guestLines)
                         {
@@ -238,13 +245,13 @@ namespace CW2
 
         public void editExtras()
         {
-            if (lblSelect.Content.ToString() == "Edit Extras:")
-            {
+            if (lblSelect.Content.ToString() == "Edit Extras:")                                         // This will check if the user has asked to change the
+            {                                                                                           // attributes of their extras.
                 switch (cmbSelect.SelectedIndex)
                 {
                     case -1:
                         break;
-                    case 0:
+                    case 0:                                                                             // Check if the user has asked to add breakfast (at index 0)
                         updatedLines.Clear();
                         foreach (string line in extrasLines)
                         {
@@ -266,6 +273,7 @@ namespace CW2
             }
         }
 
+        //******* This methods is used to recursively check, and then remove lines*******/
         public void removeExtras()
         {
             updatedLines.Clear();
@@ -282,6 +290,7 @@ namespace CW2
             }
             File.WriteAllLines(extrasPath, updatedLines);
         }
+        //*******************************************************************************/
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -292,11 +301,11 @@ namespace CW2
 
             switch (cmbAmendChoice.SelectedIndex)
             {
-                case -1:
-                    break;
+                case -1:                                        // Based on the selected item of 'AmendChoice' combo box,
+                    break;                                      // the next combo box's items will be different.
                 case 0:
-                    cmbEditDel.Items.Clear();
-                    cmbEditDel.Items.Add("Edit Customer");
+                    cmbEditDel.Items.Clear();                   // This case statement allows the user to choose what
+                    cmbEditDel.Items.Add("Edit Customer");      // they wish to edit.
                     selectedItem = 0;
                     break;
                 case 1:
@@ -321,7 +330,7 @@ namespace CW2
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
             int temp;
-            if (txtRefNumber.Text != "" && int.TryParse(txtRefNumber.Text, out temp)) 
+            if (txtRefNumber.Text != "" && int.TryParse(txtRefNumber.Text, out temp))   // Check that the reference number is valid/not blank.
             {
                 lblSelect.Visibility = Visibility.Visible;
                 cmbSelect.Visibility = Visibility.Visible;
@@ -329,11 +338,11 @@ namespace CW2
                 txtNewValue.Visibility = Visibility.Visible;
                 btnSaveChanges.Visibility = Visibility.Visible;
 
-                if (selectedItem == 0)
+                if (selectedItem == 0)                                  // If the user chose to edit a customer in the previous combo box,
                 {
-                    lblSelect.Content = "Edit Customer:";
+                    lblSelect.Content = "Edit Customer:";               // Change the label identifier to edit a customer.
                     cmbSelect.Items.Clear();
-                    cmbSelect.Items.Add("First Name");
+                    cmbSelect.Items.Add("First Name");                  // Add each customer attribute to the final combo box.
                     cmbSelect.Items.Add("Last Name");
                     cmbSelect.Items.Add("Address");
                     lblGuestValue.Visibility = Visibility.Hidden;
@@ -342,7 +351,7 @@ namespace CW2
 
                 if (selectedItem == 1)
                 {
-                    lblSelect.Content = "Edit Booking:";
+                    lblSelect.Content = "Edit Booking:";                  // Or add each booking attribute to the combo box.
                     cmbSelect.Items.Clear();
                     cmbSelect.Items.Add("Arrival Date");
                     cmbSelect.Items.Add("Departure Date");
@@ -352,7 +361,7 @@ namespace CW2
 
                 if (selectedItem == 2)
                 {
-                    lblSelect.Content = "Edit Guests:";
+                    lblSelect.Content = "Edit Guests:";                  // Or add each guest attribute to the combo box.
                     cmbSelect.Items.Clear();
                     cmbSelect.Items.Add("First Name");
                     cmbSelect.Items.Add("Last Name");
@@ -364,7 +373,7 @@ namespace CW2
 
                 if (selectedItem == 3)
                 {
-                    lblSelect.Content = "Edit Extras:";
+                    lblSelect.Content = "Edit Extras:";                  // Or add each extras attribute to the combo box.
                     cmbSelect.Items.Clear();
                     cmbSelect.Items.Add("Add Breakfast Meals");
                     cmbSelect.Items.Add("Add Evening Meals");
@@ -381,14 +390,14 @@ namespace CW2
 
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            if (txtNewValue.Text != "")
-            {
-                editCustomer();
-                editBooking();
-                editGuests();
+            if (txtNewValue.Text != "")                                     // If the user has tried to replace a value with nothing,
+            {                                                               // an error will be thrown.
+                editCustomer();                                             // Call each respective method to edit customers,
+                editBooking();                                              // bookings,
+                editGuests();                                               // guests,
                 if (cmbEditDel.SelectedIndex == 1)
                 {
-                    removeExtras();
+                    removeExtras();                                         // or extras.
                 }
                 else if (cmbEditDel.SelectedIndex == 0)
                 {
