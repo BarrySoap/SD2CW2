@@ -13,6 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+/* Author: Glenn Wilkie-Sullivan (40208762)
+ * Class Purpose: Creates customers, bookings and guests.
+ * Date last modified: 09/12/2016
+ */
+
 namespace CW2
 {
     public partial class CBG : Window
@@ -20,21 +25,26 @@ namespace CW2
         Guests guest1 = new Guests();                               // Creating objects for guests,
         Booking book1 = Booking.Instance;                           //                      bookings,
         Customer cust1 = new Customer();                            //                  and customers. This allows the class to manipulate the classes variables.
+
+        //*************/ Variables used to allow the program to find files. /****************/
         private string customerPath = @"D:\Coursework 2\Coursework2\Records\Customer Records.txt";
         private string bookingPath = @"D:\Coursework 2\Coursework2\Records\Booking Records.txt";
         private string guestsPath = @"D:\Coursework 2\Coursework2\Records\Guest Records.txt";
         private string bookRefPath = @"D:\Coursework 2\Coursework2\Records\BookingRefNumber.txt";
         private string custRefPath = @"D:\Coursework 2\Coursework2\Records\CustomerRefNumber.txt";
-        private int noOfGuests = 0;
-        private int temp;
+        //***********************************************************************************/ 
+
+        private int noOfGuests = 0; // This variable is used as a validator to check if the number of guests hasn't exceeded 4.
+        private int temp;           // This variable is used for tryParse.
 
         public CBG()
         {
             InitializeComponent();
             hideAdditions();                                        // Call the hide method below.
-            makeFiles();
+            makeFiles();                                            // Make the files necessary to store records.
         }
 
+        //********** This method is used to check if files are created to store records, as well as make them ***/
         public void makeFiles()
         {
             if (!File.Exists(customerPath))
@@ -77,12 +87,14 @@ namespace CW2
                 }
             }
 
-            book1.RefNumber = double.Parse(File.ReadAllText(bookRefPath));
-            cust1.CustRefNumber = double.Parse(File.ReadAllText(custRefPath));
-            book1.RefNumber = book1.RefNumber + 1;
+            book1.RefNumber = double.Parse(File.ReadAllText(bookRefPath));          // Read the file set aside for containing the current booking reference number.
+            cust1.CustRefNumber = double.Parse(File.ReadAllText(custRefPath));      // Read the file set aside for containing the current customer reference number.
+            book1.RefNumber = book1.RefNumber + 1;                                  // Auto-increment.
             cust1.CustRefNumber = cust1.CustRefNumber + 1;
         }
+        //**********************************************************************************************//
 
+        //*********** This method will hide specific variables until they are needed in the GUI ******************/
         public void hideAdditions()
         {
             lblCBG.Visibility = Visibility.Hidden;                  // This method will hide every label and text box so
@@ -96,7 +108,9 @@ namespace CW2
             txtCBG2.Visibility = Visibility.Hidden;                 // we avoid any exceptions where the user enteres
             txtCBG3.Visibility = Visibility.Hidden;                 // data before deciding to add a customer/booking/guest.
         }
+        //*********************************************************************************************************/
 
+        //********* If the user decides to add a customer, this methods will handle the GUI elements involved. ****/
         private void btnAddCust_Click(object sender, RoutedEventArgs e)
         {
             btnaddCBG.Content = "Add Customer";
@@ -118,7 +132,9 @@ namespace CW2
             lblProperty3.Visibility = Visibility.Hidden;            // The third text box isn't needed, so hide the label and text box.
             txtCBG3.Visibility = Visibility.Hidden;
         }
+        //*********************************************************************************************************/
 
+        //********* If the user decides to add a booking, this methods will handle the GUI elements involved. ****/
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             btnaddCBG.Content = "Add Booking";
@@ -139,7 +155,9 @@ namespace CW2
             txtCBG1.Visibility = Visibility.Hidden;                 // Hide the top two text boxes, which are usually
             txtCBG1_5.Visibility = Visibility.Hidden;               // for a first and last name.
         }
+        //*********************************************************************************************************/
 
+        //********* If the user decides to add guests, this methods will handle the GUI elements involved. ****/
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
             btnaddCBG.Content = "Add Guest";
@@ -163,20 +181,22 @@ namespace CW2
             txtCBG2.Visibility = Visibility.Visible;
             txtCBG3.Visibility = Visibility.Visible;
         }
+        //*********************************************************************************************************/
 
+        //********* This event will handle the creation of customers, bookings and guests. ***************/
         private void btnaddCBG_Click_1(object sender, RoutedEventArgs e)
         {
             if (lblCBG.Content.ToString() == "Add a Customer:")                                             // Check if the header label is for adding a customer. As said above, this makes for an easy validator/check.
             {
                 if (txtCBG1.Text != "" && txtCBG1_5.Text != "" && txtCBG2.Text != "")                       // Check if the first/last name and address text boxes aren't blank.
                 {
-                    if (int.TryParse(txtCBG1.Text, out temp) || int.TryParse(txtCBG1_5.Text, out temp) || int.TryParse(txtCBG2.Text, out temp))
+                    if (int.TryParse(txtCBG1.Text, out temp) || int.TryParse(txtCBG1_5.Text, out temp) || int.TryParse(txtCBG2.Text, out temp))     // Validate the first/second name fields, and passport number.
                     {
                         MessageBox.Show("The above fields must be valid!");
                     } else
                     {
                         cust1.CustomerFirstName = txtCBG1.Text;
-                        cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If not, update the object variables with the values of the text boxes.
+                        cust1.CustomerSecondName = txtCBG1_5.Text;                                              // If the text fields pass validation, update the customer variables.
                         cust1.CustomerAddress = txtCBG2.Text;
                         MessageBox.Show("Your customer reference number is: " + cust1.CustRefNumber);
 
@@ -207,9 +227,9 @@ namespace CW2
 
             if (lblCBG.Content.ToString() == "Add a Booking:")                                              // Check if the header label is for adding a booking.
             {
-                DateTime d;                                                                                 // Initialise a temporary variable for a tryparse.
+                DateTime dateTimeTemp;                                                                                 // Initialise a temporary variable for a tryparse.
 
-                if (DateTime.TryParse(txtCBG2.Text, out d) && DateTime.TryParse(txtCBG3.Text, out d))       // If the arrival/departure date text boxes are in DateTime format,
+                if (DateTime.TryParse(txtCBG2.Text, out dateTimeTemp) && DateTime.TryParse(txtCBG3.Text, out dateTimeTemp))       // If the arrival/departure date text boxes are in DateTime format,
                 {
                     book1.ArrivalDate = DateTime.Parse(txtCBG2.Text);                                       // Update the object variables.
                     book1.DepartureDate = DateTime.Parse(txtCBG3.Text);
