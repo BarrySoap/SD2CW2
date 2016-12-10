@@ -1,0 +1,26 @@
+﻿<Window x:Class="CW2.Extras"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CW2"
+        mc:Ignorable="d"
+        Title="Extras" Height="300" Width="419.066">
+    <Grid>
+        <Label x:Name="lblExtras" Content="Extras" HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="62" FontWeight="Bold" FontStyle="Italic" FontSize="14"/>
+        <CheckBox x:Name="checkMeals" Content="Tick Box for Evening Meals" HorizontalAlignment="Left" Height="20" Margin="10,47,0,0" VerticalAlignment="Top" Width="165" Checked="checkMeals_Checked" Unchecked="checkMeals_Unchecked"/>
+        <TextBox x:Name="txtEveningDietary" HorizontalAlignment="Left" Height="66" Margin="10,67,0,0" TextWrapping="Wrap" Text="Add any dietary requirements here!" VerticalAlignment="Top" Width="165"/>
+        <CheckBox x:Name="checkBreakfast" Content="Tick box for Breakfast" HorizontalAlignment="Left" Height="20" Margin="216,47,0,0" VerticalAlignment="Top" Width="144" Checked="checkBreakfast_Checked" Unchecked="checkBreakfast_Unchecked"/>
+        <TextBox x:Name="txtBreakDietary" HorizontalAlignment="Left" Height="66" Margin="216,67,0,0" TextWrapping="Wrap" Text="Add any dietary requirements here!" VerticalAlignment="Top" Width="165"/>
+        <CheckBox x:Name="checkCarHire" Content="Tick box for Car Hire" HorizontalAlignment="Left" Height="20" Margin="216,138,0,0" VerticalAlignment="Top" Width="165" Checked="checkCarHire_Checked" Unchecked="checkCarHire_Unchecked"/>
+        <TextBlock x:Name="txtNote" HorizontalAlignment="Left" Height="33" Margin="163,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" FontSize="8"><Run Text="Please note: evening meals will be £15 per person per night."/><LineBreak/><Run Text="Breakfast will cost £5 per person per day."/><LineBreak/><Run Text="Car Hire costs £50 per day."/></TextBlock>
+        <Label x:Name="lblHireStart" Content="Hire Start Date" HorizontalAlignment="Left" Height="25" Margin="117,163,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblHireEnd" Content="Hire End Date" HorizontalAlignment="Left" Height="25" Margin="117,193,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="lblDriverName" Content="Name of Driver" HorizontalAlignment="Left" Height="25" Margin="117,223,0,0" VerticalAlignment="Top" Width="94"/>
+        <Button x:Name="btnAdd" Content="Add &#xA;Requirements" HorizontalAlignment="Left" Height="85" Margin="10,163,0,0" VerticalAlignment="Top" Width="102" Click="btnAdd_Click"/>
+        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="216,164,0,0" VerticalAlignment="Top" Width="165"/>
+        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Height="25" Margin="216,193,0,0" VerticalAlignment="Top" Width="165"/>
+        <TextBox x:Name="txtDriverName" HorizontalAlignment="Left" Height="25" Margin="216,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="CW2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CW2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="317.261" Width="523.441">
+    <Grid>
+        <Image Source="holidayvillage.jpg" x:Name="image" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="515" Margin="0,-1,0,0"/>
+        <Label x:Name="lblHeader" Content="Napier Holiday Village - Please Choose an Option:" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="485" FontFamily="Arial" FontWeight="Bold" FontSize="20" Background="{x:Null}" BorderBrush="Red"/>
+        <Button x:Name="btnAddCBG" Content="Add New Customer, Booking or Guest" HorizontalAlignment="Left" Height="25" Margin="115,83,0,0" VerticalAlignment="Top" Width="280" Click="btnAddCBG_Click" BorderBrush="#FF0CFF00">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnExtras" Content="Add Extras to Booking" HorizontalAlignment="Left" Height="25" Margin="115,113,0,0" VerticalAlignment="Top" Width="280" Click="btnExtras_Click" BorderBrush="#FF0CFF00"/>
+        <Button x:Name="btnInvoice" Content="Display Invoice" HorizontalAlignment="Left" Height="25" Margin="115,143,0,0" VerticalAlignment="Top" Width="280" Click="btnInvoice_Click" BorderBrush="#FF0CFF00"/>
+        <Button x:Name="btnDelCustomer" Content="Delete Customer" HorizontalAlignment="Left" Height="25" Margin="115,173,0,0" VerticalAlignment="Top" Width="280" Click="btnDelCustomer_Click" BorderBrush="#FF0CFF00"/>
+        <Button x:Name="btnDelBooking" Content="Delete Booking" HorizontalAlignment="Left" Height="25" Margin="115,203,0,0" VerticalAlignment="Top" Width="280" Click="btnDelBooking_Click" BorderBrush="#FF0CFF00"/>
+        <Button x:Name="btnAmendCBG" Content="Amend Customer, Booking or Guest" HorizontalAlignment="Left" Height="25" Margin="115,233,0,0" VerticalAlignment="Top" Width="280" Click="btnAmendCBG_Click" BorderBrush="#FF0CFF00"/>
+    </Grid>
+</Window>

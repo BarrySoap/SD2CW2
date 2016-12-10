@@ -1,0 +1,36 @@
+﻿<Window x:Class="CW2.AmendCBG"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CW2"
+        mc:Ignorable="d"
+        Title="AmendCBG" Height="349.58" Width="450">
+    <Grid>
+        <Label x:Name="lblAmendCBG" Content="Amend Your Details" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="145"/>
+        <Frame x:Name="frmAmend" Content="" HorizontalAlignment="Left" Height="227" Margin="10,78,0,0" VerticalAlignment="Top" Width="422" BorderThickness="1" BorderBrush="Black"/>
+        <ComboBox x:Name="cmbAmendChoice" HorizontalAlignment="Left" Margin="110,48,0,0" VerticalAlignment="Top" Width="105" Height="25">
+            <ComboBoxItem Content="Edit Customer"/>
+            <ComboBoxItem Content="Edit Booking"/>
+            <ComboBoxItem Content="Edit Guests"/>
+            <ComboBoxItem Content="Add/Remove Extras"/>
+        </ComboBox>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Height="25" Margin="220,48,0,0" VerticalAlignment="Top" Width="90" Click="btnSubmit_Click"/>
+        <ComboBox x:Name="cmbEditDel" HorizontalAlignment="Left" Height="26" Margin="35,176,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="btnAccept" Content="Accept" HorizontalAlignment="Left" Height="22" Margin="35,209,0,0" VerticalAlignment="Top" Width="140" Click="btnAccept_Click"/>
+        <ComboBox x:Name="cmbSelect" HorizontalAlignment="Left" Height="25" Margin="278,127,0,0" VerticalAlignment="Top" Width="130">
+            <ComboBoxItem Content="First Name"/>
+            <ComboBoxItem Content="Last Name"/>
+            <ComboBoxItem Content="Address"/>
+        </ComboBox>
+        <Label x:Name="lblSelect" Content="Edit x:" HorizontalAlignment="Left" Height="31" Margin="278,91,0,0" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="lblNewValue" Content="with new value:" HorizontalAlignment="Left" Height="31" Margin="278,159,0,0" VerticalAlignment="Top" Width="130"/>
+        <TextBox x:Name="txtNewValue" HorizontalAlignment="Left" Height="25" Margin="278,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="btnSaveChanges" Content="Save Changes" HorizontalAlignment="Left" Height="23" Margin="286,225,0,0" VerticalAlignment="Top" Width="115" Click="btnSaveChanges_Click"/>
+        <Label x:Name="lblRefNumber" Content="Please enter your &#xD;&#xA;reference number:" HorizontalAlignment="Left" Height="41" Margin="49,91,0,0" VerticalAlignment="Top" Width="113" RenderTransformOrigin="0.268,0.088"/>
+        <TextBox x:Name="txtRefNumber" HorizontalAlignment="Left" Height="30" Margin="35,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="txtGuestsValue" HorizontalAlignment="Left" Height="25" Margin="278,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
+        <Label x:Name="lblGuestValue" Content="Please enter Guest passport number:" HorizontalAlignment="Left" Height="25" Margin="66,263,0,0" VerticalAlignment="Top" Width="207"/>
+
+    </Grid>
+</Window>
